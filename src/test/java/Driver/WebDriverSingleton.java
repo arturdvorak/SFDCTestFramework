@@ -1,4 +1,4 @@
-package Driver;
+package driver;
 
 import org.openqa.selenium.WebDriver;
 
@@ -13,8 +13,8 @@ public class WebDriverSingleton {
     public static WebDriver getWebDriverInstance() {
         if (null == driver) {
             driver = createDriver();
-            driver.manage().timeouts().pageLoadTimeout(20, TimeUnit.SECONDS);
-            driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
+            driver.manage().timeouts().pageLoadTimeout(10, TimeUnit.SECONDS);
+            driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
             driver.manage().window().maximize();
         }
         return driver;

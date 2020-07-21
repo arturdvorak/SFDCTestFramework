@@ -1,10 +1,11 @@
-package Pages;
+package pages;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 public class LoginPage extends BasePage {
+    private WebDriver driver;
     private WebElement username;
     private WebElement pw;
 
@@ -15,11 +16,14 @@ public class LoginPage extends BasePage {
         super(driver);
     }
 
+    public void openPage (String url) {
+        getDriver().get(url);
+    }
 
-    public HomePage signIn(String userName, String passwordKeys) {
+    public HomePage login(String userName, String passwordKeys) {
         username.sendKeys(userName);
         pw.sendKeys(passwordKeys);
         loginButton.click();
-        return new HomePage(getDriver());
+        return new HomePage(driver);
     }
 }

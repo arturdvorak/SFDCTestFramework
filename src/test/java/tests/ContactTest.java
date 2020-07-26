@@ -8,7 +8,6 @@ public class ContactTest extends BaseTest {
     public void createNewContact() {
         loginSteps.open(login_url);
         loginSteps.login(username, password);
-        homeSteps.openNewContactDialog();
-        //homeSteps.pageIsOpen();
+        homeSteps.createNewContact();
     }
 }

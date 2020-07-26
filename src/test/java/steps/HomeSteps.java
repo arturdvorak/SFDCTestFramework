@@ -1,6 +1,7 @@
 package steps;
 
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import pages.HomePage;
 
 public class HomeSteps {
@@ -10,7 +11,8 @@ public class HomeSteps {
         homePage = new HomePage(driver);
     }
 
-    public void openNewContactDialog() {
+    public void createNewContact() {
         homePage.openNewContactDialog();
+        homePage.fillOutContactDialogAndSave();
     }
 }

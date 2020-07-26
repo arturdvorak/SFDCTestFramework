@@ -2,6 +2,7 @@ package tests;
 
 import driver.WebDriverSingleton;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.AfterClass;
 import steps.HomeSteps;
 import steps.LoginSteps;

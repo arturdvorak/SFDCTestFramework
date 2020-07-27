@@ -2,7 +2,6 @@ package steps;
 
 import org.openqa.selenium.WebDriver;
 import pages.ContactListPage;
-import pages.HomePage;
 import pages.NewContactModal;
 
 public class ContactSteps {
@@ -16,7 +15,7 @@ public class ContactSteps {
 
     public void createNewContact(String lastName) {
         contactListPage.openPage();
-        newContactModal.openPage();
+        contactListPage.openNewContactModal();
         newContactModal.fillOutContactDialogAndSave(lastName);
         newContactModal.saveNewContact();
     }

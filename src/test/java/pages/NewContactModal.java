@@ -5,20 +5,15 @@ import org.openqa.selenium.WebDriver;
 import java.util.Date;
 
 public class NewContactModal extends BasePage {
+    private static final By lastNameInput = By.cssSelector("input[placeholder='Last Name']");
+    private static final By fieldSearchAccount = By.cssSelector("input[title='Search Accounts']");
+    private static final By firstItem = By.cssSelector("div[title='Test1");
+    private static final By buttonSave = By.cssSelector("button[title='Save']");
     Date currentDate = new Date();
-    By buttonNew = By.cssSelector("a[title='New']");
-    By lastNameInput = By.cssSelector("input[placeholder='Last Name']");
-    By fieldSearchAccount = By.cssSelector("input[title='Search Accounts']");
-    By firstItem = By.cssSelector("div[title='Test1");
-    By buttonSave = By.cssSelector("button[title='Save']");
 
 
     public NewContactModal(WebDriver driver) {
         super(driver);
-    }
-
-    public void openPage() {
-        driver.findElement(buttonNew).click();
     }
 
     public void fillOutContactDialogAndSave(String lastName) {

@@ -1,29 +1,21 @@
-package Pages;
+package pages;
 
-import Driver.WebDriverSingleton;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
 
 public abstract class BasePage {
     LoginPage loginPage;
     HomePage homePage;
-    private WebDriver driver;
+    protected WebDriver driver;
+    protected WebDriverWait wait;
 
 
     public BasePage(WebDriver driver) {
-        this.driver = WebDriverSingleton.getWebDriverInstance();
-        PageFactory.initElements(driver, this);
+        this.driver = driver;
+        wait = new WebDriverWait(driver, 30);
     }
 
     protected WebDriver getDriver() {
         return driver;
-    }
-
-    @AfterMethod(description = "Closing ChromeDriver", alwaysRun = true)
-    public void closeDriver() {
-        driver.quit();
     }
 }

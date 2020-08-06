@@ -2,7 +2,9 @@ package models;
 
 import lombok.*;
 
-@Getter @Setter @AllArgsConstructor @Builder
+@Getter
+@Setter
+@Builder
 public class Contact {
     private String salutation;
     private String firstName;

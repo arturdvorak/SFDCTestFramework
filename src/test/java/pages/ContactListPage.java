@@ -19,11 +19,11 @@ public class ContactListPage extends BasePage {
         driver.findElement(buttonNew).click();
     }
 
-    public String getSpecificContactLink(String lastNameContactToRemove) {
-        return driver.findElement(By.xpath("//*[text() = '" + lastNameContactToRemove + "']")).getAttribute("href");
+    public String getContactLink(String nameContact) {
+        return driver.findElement(By.xpath(String.format("//*[text() = '%s']", nameContact))).getAttribute("href");
     }
 
-    public void openContactByLastName(String lastNameContactToRemove) {
-        driver.get(getSpecificContactLink(lastNameContactToRemove));
+    public void openContactByLastName(String nameContact) {
+        driver.get(getContactLink(nameContact));
     }
 }

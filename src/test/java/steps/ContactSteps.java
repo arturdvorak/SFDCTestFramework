@@ -23,9 +23,9 @@ public class ContactSteps {
         newContactModal.saveNewContact();
     }
 
-    public void removeAccount(String lastNameContactToRemove) {
+    public void removeAccount(String nameContact) {
         contactListPage.openPage();
-        contactListPage.openContactByLastName(lastNameContactToRemove);
+        contactListPage.openContactByLastName(nameContact);
         contactPage.deleteOpenedContact();
     }
 }

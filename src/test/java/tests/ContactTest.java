@@ -2,13 +2,17 @@ package tests;
 
 import org.testng.annotations.Test;
 
+import java.util.Date;
+
 public class ContactTest extends BaseTest {
-    String lastNameContact = "Contact";
+    Date currentDate = new Date();
+    String lastNameContact = "Contact" + currentDate;
 
     @Test
-    public void createNewContact() {
+    public void createAndRemoveContact() {
         loginSteps.open(login_url);
         loginSteps.login(username, password);
         contactSteps.createNewContact(lastNameContact);
+        contactSteps.removeAccount(lastNameContact);
     }
 }

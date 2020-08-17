@@ -1,5 +1,6 @@
 package steps;
 
+import models.Contact;
 import org.openqa.selenium.WebDriver;
 import pages.ContactListPage;
 import pages.ContactPage;
@@ -16,16 +17,16 @@ public class ContactSteps {
         contactPage = new ContactPage(driver);
     }
 
-    public void createNewContact(String lastName) {
+    public void createNewContact(Contact contact) {
         contactListPage.openPage();
         contactListPage.openNewContactModal();
-        newContactModal.fillOutContactDialogAndSave(lastName);
+        newContactModal.fillOutContactDialogAndSave(contact);
         newContactModal.saveNewContact();
     }
 
-    public void removeAccount(String nameContact) {
+    public void removeAccount(String firstName, String lastName) {
         contactListPage.openPage();
-        contactListPage.openContactByLastName(nameContact);
+        contactListPage.openContactByLastName(firstName, lastName);
         contactPage.deleteOpenedContact();
     }
 }

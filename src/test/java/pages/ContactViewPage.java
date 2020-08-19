@@ -6,58 +6,57 @@ import org.openqa.selenium.WebDriver;
 import static org.testng.Assert.assertEquals;
 
 public class ContactViewPage extends BasePage {
-    private static final By detailsTab = By.xpath("//a[@data-label='Details' and @tabindex='-1']");
-
-    private static final By nameField = By.xpath("//div/span[text()='Name']/../../div[2]/span/slot/slot/lightning-formatted-name");
-    private static final By accountNameField = By.xpath("//span[text()='Account Name']/../../div[2]//a");
-    private static final By titleField = By.xpath("//span[text()='Title']/../../div[2]/span/slot/slot/lightning-formatted-text");
-    private static final By emailField = By.xpath("//span[text()='Email']/../../div[2]//a");
-    private static final By phoneField = By.xpath("//span[text()='Phone']/../../div[2]//a");
-    private static final By mobileField = By.xpath("//span[text()='Mobile']/../../div[2]//a");
-    private static final By reportsToField = By.xpath("//span[text()='Reports To']/../../div[2]//a");
-    private static final By departmentField = By.xpath("//span[text()='Department']/../../div[2]/span/slot/slot/lightning-formatted-text");
-    private static final By faxField = By.xpath("//span[text()='Fax']/../../div[2]//a");
-    private static final By addressStreetField = By.xpath("//span[text()='Mailing Address']/../../div[2]//a/div[1]");
-    private static final By addressCityStateZipField = By.xpath("//span[text()='Mailing Address']/../../div[2]//a/div[2]");
-    private static final By addressCountryField = By.xpath("//span[text()='Mailing Address']/../../div[2]//a/div[3]");
+    private static final By TAB_DETAILS = By.xpath("//a[@data-label='Details' and @tabindex='-1']");
+    private static final By FIELD_NAME = By.xpath("//div/span[text()='Name']/../../div[2]/span/slot/slot/lightning-formatted-name");
+    private static final By FIELD_ACCOUNT_NAME = By.xpath("//span[text()='Account Name']/../../div[2]//a");
+    private static final By FIELD_TITLE = By.xpath("//span[text()='Title']/../../div[2]/span/slot/slot/lightning-formatted-text");
+    private static final By FIELD_EMAIL = By.xpath("//span[text()='Email']/../../div[2]//a");
+    private static final By FIELD_PHONE = By.xpath("//span[text()='Phone']/../../div[2]//a");
+    private static final By FIELD_MOBILE = By.xpath("//span[text()='Mobile']/../../div[2]//a");
+    private static final By FIELD_REPORT_TO = By.xpath("//span[text()='Reports To']/../../div[2]//a");
+    private static final By FIELD_DEPARTMENT = By.xpath("//span[text()='Department']/../../div[2]/span/slot/slot/lightning-formatted-text");
+    private static final By FIELD_FAX = By.xpath("//span[text()='Fax']/../../div[2]//a");
+    private static final By FIELD_ADDRESS_STREET = By.xpath("//span[text()='Mailing Address']/../../div[2]//a/div[1]");
+    private static final By FIELD_ADDRESS_CITY_STATE_ZIP = By.xpath("//span[text()='Mailing Address']/../../div[2]//a/div[2]");
+    private static final By FIELD_ADDRESS_COUNTRY = By.xpath("//span[text()='Mailing Address']/../../div[2]//a/div[3]");
 
     public ContactViewPage(WebDriver driver) {
         super(driver);
     }
 
     public void validateContactData(Contact contact) {
-        driver.findElement(detailsTab).click();
-        assertEquals(driver.findElement(nameField).getText(),
+        driver.findElement(TAB_DETAILS).click();
+        assertEquals(driver.findElement(FIELD_NAME).getText(),
                 contact.getSalutation() + " "
                         + contact.getFirstName() + " "
                         + contact.getMiddleName() + " "
                         + contact.getLastName() + " "
                         + contact.getSuffix(),
                 "Name is saved incorrectly.");
-        assertEquals(driver.findElement(accountNameField).getText(), contact.getAccountName(),
+        assertEquals(driver.findElement(FIELD_ACCOUNT_NAME).getText(), contact.getAccountName(),
                 "Account Name is saved incorrectly.");
-        assertEquals(driver.findElement(titleField).getText(), contact.getTitle(),
+        assertEquals(driver.findElement(FIELD_TITLE).getText(), contact.getTitle(),
                 "Title is saved incorrectly.");
-        assertEquals(driver.findElement(emailField).getText(), contact.getEmail(),
+        assertEquals(driver.findElement(FIELD_EMAIL).getText(), contact.getEmail(),
                 "Email is saved incorrectly.");
-        assertEquals(driver.findElement(phoneField).getText(), contact.getPhone(),
+        assertEquals(driver.findElement(FIELD_PHONE).getText(), contact.getPhone(),
                 "Phone is saved incorrectly.");
-        assertEquals(driver.findElement(mobileField).getText(), contact.getMobile(),
+        assertEquals(driver.findElement(FIELD_MOBILE).getText(), contact.getMobile(),
                 "Mobile is saved incorrectly.");
-        assertEquals(driver.findElement(reportsToField).getText(), contact.getReportsTo(),
+        assertEquals(driver.findElement(FIELD_REPORT_TO).getText(), contact.getReportsTo(),
                 "Reports To is saved incorrectly.");
-        assertEquals(driver.findElement(departmentField).getText(), contact.getDepartment(),
+        assertEquals(driver.findElement(FIELD_DEPARTMENT).getText(), contact.getDepartment(),
                 "Department is saved incorrectly.");
-        assertEquals(driver.findElement(faxField).getText(), contact.getFax(),
+        assertEquals(driver.findElement(FIELD_FAX).getText(), contact.getFax(),
                 "Fax is saved incorrectly.");
-        assertEquals(driver.findElement(addressStreetField).getText(), contact.getMailingStreet(),
+        assertEquals(driver.findElement(FIELD_ADDRESS_STREET).getText(), contact.getMailingStreet(),
                 "MailingStreet is saved incorrectly.");
-        assertEquals(driver.findElement(addressCityStateZipField).getText(),
+        assertEquals(driver.findElement(FIELD_ADDRESS_CITY_STATE_ZIP).getText(),
                 contact.getMailingCity() + ", "
                         + contact.getMailingState() + " "
                         + contact.getMailingZip(),
                 "CityStateZip is saved incorrectly.");
-        assertEquals(driver.findElement(addressCountryField).getText(), contact.getMailingCountry(),
+        assertEquals(driver.findElement(FIELD_ADDRESS_COUNTRY).getText(), contact.getMailingCountry(),
                 "MailingCountry is saved incorrectly.");
     }
 

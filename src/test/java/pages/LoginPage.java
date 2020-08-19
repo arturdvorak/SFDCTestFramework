@@ -5,8 +5,8 @@ import org.openqa.selenium.WebDriver;
 
 public class LoginPage extends BasePage {
     private static final By USERNAME_CSS = By.id("username");
-    private static final By password = By.id("password");
-    private static final By login = By.id("Login");
+    private static final By INPUT_PASSWORD = By.id("password");
+    private static final By INPUT_LOGIN = By.id("Login");
 
     public LoginPage(WebDriver driver) {
         super(driver);
@@ -18,8 +18,8 @@ public class LoginPage extends BasePage {
 
     public HomePage login(String userName, String passwordKeys) {
         driver.findElement(USERNAME_CSS).sendKeys(userName);
-        driver.findElement(password).sendKeys(passwordKeys);
-        driver.findElement(login).click();
+        driver.findElement(INPUT_PASSWORD).sendKeys(passwordKeys);
+        driver.findElement(INPUT_LOGIN).click();
         return new HomePage(driver);
     }
 }

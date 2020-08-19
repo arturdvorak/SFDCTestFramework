@@ -24,4 +24,5 @@ public class Contact {
     private String mailingState;
     private String mailingZip;
     private String mailingCountry;
+    private String otherStreet;
 }

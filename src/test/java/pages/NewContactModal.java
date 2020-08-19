@@ -3,8 +3,11 @@ package pages;
 import models.Contact;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
 public class NewContactModal extends BasePage {
+    private static final By contactBanner = By.cssSelector("img[title='Contact']");
+
     private static final By salutationDropDown = By.cssSelector("div[class='uiPopupTrigger']");
     private static final By firstNameInput = By.cssSelector("input[placeholder='First Name']");
     private static final By middleNameInput = By.cssSelector("input[placeholder='Middle Name']");
@@ -20,7 +23,7 @@ public class NewContactModal extends BasePage {
 
     private static final By reportToDropDown = By.cssSelector("input[Title='Search Contacts']");
 
-    private static final By deparment = By.xpath("//span[text() = 'Department']/../../input");
+    private static final By department = By.xpath("//span[text() = 'Department']/../../input");
     private static final By fax = By.xpath("//span[text() = 'Fax']/../../input");
 
     private static final By mailingStreet = By.cssSelector("textarea[placeholder='Mailing Street']");
@@ -35,13 +38,13 @@ public class NewContactModal extends BasePage {
         super(driver);
     }
 
-    public void fillOutContactDialogAndSave(Contact contact) {
+    public void fillOutNewContactModal(Contact contact) {
         driver.findElement(salutationDropDown).click();
         driver.findElement(By.xpath(String.format("//a[text()='%s']", contact.getSalutation()))).click();
         driver.findElement(firstNameInput).sendKeys(contact.getFirstName());
-        //driver.findElement(middleNameInput).sendKeys(contact.getMiddleName());
+        driver.findElement(middleNameInput).sendKeys(contact.getMiddleName());
         driver.findElement(lastNameInput).sendKeys(contact.getLastName());
-        //driver.findElement(suffix).sendKeys(contact.getSuffix());
+        driver.findElement(suffix).sendKeys(contact.getSuffix());
         driver.findElement(fieldSearchAccount).click();
         driver.findElement(By.cssSelector(String.format("div[title='%s']", contact.getAccountName()))).click();
 
@@ -53,7 +56,7 @@ public class NewContactModal extends BasePage {
         driver.findElement(reportToDropDown).click();
         driver.findElement(By.cssSelector(String.format("div[title='%s']", contact.getReportsTo()))).click();
 
-        driver.findElement(deparment).sendKeys(contact.getDepartment());
+        driver.findElement(department).sendKeys(contact.getDepartment());
         driver.findElement(fax).sendKeys(contact.getFax());
 
         driver.findElement(mailingStreet).sendKeys(contact.getMailingStreet());
@@ -63,7 +66,8 @@ public class NewContactModal extends BasePage {
         driver.findElement(mailingCountry).sendKeys(contact.getMailingCountry());
     }
 
-    public void saveNewContact() {
+    public void saveContact() {
         driver.findElement(buttonSave).click();
+        wait.until(ExpectedConditions.presenceOfElementLocated(contactBanner));
     }
 }

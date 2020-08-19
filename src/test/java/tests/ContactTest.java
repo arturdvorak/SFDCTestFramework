@@ -1,30 +1,32 @@
 package tests;
 
+import com.github.javafaker.Faker;
 import models.Contact;
 import org.testng.annotations.Test;
 import java.util.Date;
+import java.util.Locale;
 
 public class ContactTest extends BaseTest {
-    Date currentDate = new Date();
+    Faker usFaker = new Faker(new Locale("en-US"));
     Contact contact = Contact.builder()
             .salutation("Mr.")
-            .firstName("FirstTest1")
-            .middleName("MiddleTest1")
-            .lastName("Contact" + currentDate)
-            .suffix("Suf")
+            .firstName(usFaker.name().firstName())
+            .middleName("Test")
+            .lastName(usFaker.name().lastName())
+            .suffix(usFaker.name().suffix())
             .accountName("Test1")
-            .title("Test Title")
-            .email("test@gmail.com")
-            .phone("929333666")
-            .mobile("929333666")
-            .reportsTo("HeadContact")
+            .title(usFaker.company().profession())
+            .email(usFaker.internet().emailAddress())
+            .phone(usFaker.phoneNumber().cellPhone())
+            .mobile(usFaker.phoneNumber().cellPhone())
+            .reportsTo("1HeadContact")
             .department("Test Department")
-            .fax("929333666")
-            .mailingStreet("Test Street")
-            .mailingCity("TestCity")
-            .mailingState("FL")
-            .mailingZip("33666")
-            .mailingCountry("USA")
+            .fax(usFaker.phoneNumber().cellPhone())
+            .mailingStreet(usFaker.address().streetName())
+            .mailingCity(usFaker.address().city())
+            .mailingState(usFaker.address().state())
+            .mailingZip(usFaker.address().zipCode())
+            .mailingCountry(usFaker.address().country())
             .build();
 
     @Test
@@ -32,6 +34,7 @@ public class ContactTest extends BaseTest {
         loginSteps.open(login_url);
         loginSteps.login(username, password);
         contactSteps.createNewContact(contact);
-        contactSteps.removeAccount(contact.getFirstName(), contact.getLastName());
+        contactSteps.validationOfContact(contact);
+        contactSteps.removeAccount(contact);
     }
 }

@@ -33,6 +33,12 @@ public class ContactSteps {
         contactViewPage.validateContactData(contact);
     }
 
+    public void updateContact(Contact contact_original, Contact contact_updated) {
+        //contactListPage.openPage();
+        //contactListPage.openContact(contact_original);
+        contactViewPage.updateOpenContact(contact_updated);
+    }
+
     public void removeAccount(Contact contact) {
         contactListPage.openPage();
         contactListPage.openContact(contact);

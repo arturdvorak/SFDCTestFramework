@@ -8,7 +8,7 @@ import java.util.Locale;
 
 public class ContactTest extends BaseTest {
     Faker usFaker = new Faker(new Locale("en-US"));
-    Contact contact = Contact.builder()
+    Contact contact_original = Contact.builder()
             .salutation("Mr.")
             .firstName(usFaker.name().firstName())
             .middleName("Test")
@@ -29,12 +29,35 @@ public class ContactTest extends BaseTest {
             .mailingCountry(usFaker.address().country())
             .build();
 
+    Contact contact_updated = Contact.builder()
+            .salutation("Ms.")
+            .firstName(usFaker.name().firstName())
+            .middleName("Test")
+            .lastName(usFaker.name().lastName())
+            .suffix(usFaker.name().suffix())
+            .accountName("Test2")
+            .title(usFaker.company().profession())
+            .email(usFaker.internet().emailAddress())
+            .phone(usFaker.phoneNumber().cellPhone())
+            .mobile(usFaker.phoneNumber().cellPhone())
+            .reportsTo("HeadContact2")
+            .department("Test Department")
+            .fax(usFaker.phoneNumber().cellPhone())
+            .mailingStreet(usFaker.address().streetName())
+            .mailingCity(usFaker.address().city())
+            .mailingState(usFaker.address().state())
+            .mailingZip(usFaker.address().zipCode())
+            .mailingCountry(usFaker.address().country())
+            .build();
+
     @Test
     public void createAndRemoveContact() {
         loginSteps.open(login_url);
         loginSteps.login(username, password);
-        contactSteps.createNewContact(contact);
-        contactSteps.validationOfContact(contact);
-        contactSteps.removeAccount(contact);
+        //contactSteps.createNewContact(contact_original);
+        //contactSteps.validationOfContact(contact_original);
+        contactSteps.updateContact(contact_original, contact_updated);
+        contactSteps.validationOfContact(contact_updated);
+        //contactSteps.removeAccount(contact_to_update);
     }
 }

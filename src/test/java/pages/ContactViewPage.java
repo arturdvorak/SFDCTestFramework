@@ -1,8 +1,11 @@
 package pages;
 
+import elements.TextArea;
+import elements.TextInput;
 import models.Contact;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import static org.testng.Assert.assertEquals;
 
@@ -10,30 +13,13 @@ public class ContactViewPage extends BasePage {
     private static final By TAB_DETAILS = By.xpath("//a[@data-label='Details' and @tabindex='-1']");
     private static final By FIELD_NAME_EDIT = By.xpath("//div/span[text()='Name']/../..//button");
 
-    //By.cssSelector doesn't work -> changing to By.xpath
     private static final By DROPDOWN_SALUTATION = By.xpath("//input[@name='salutation']");
-    private static final By INPUT_FIRST_NAME = By.xpath("//input[@placeholder='First Name']");
-    private static final By INPUT_MIDDLE_NAME = By.xpath("//input[@placeholder='Middle Name']");
-    private static final By INPUT_LAST_NAME = By.xpath("//input[@placeholder='Last Name']");
-    private static final By INPUT_SUFFIX = By.xpath("//input[@placeholder='Suffix']");
 
-    private static final By BUTTON_CLEAR_ACCOUNT_NAME = By.xpath("//label[text()='Account Name']/../div//button");
+    private static final By BUTTON_CLEAR_ACCOUNT_NAME = By.xpath("//label[text()='Account Name']/../div//button/lightning-primitive-icon");
     private static final By INPUT_SEARCH_ACCOUNT = By.xpath("//input[@placeholder='Search Accounts...']");
 
-    private static final By BUTTON_CLEAR_REPORTS_TO = By.xpath("//label[text()='Reports To']/../div//button");
+    private static final By BUTTON_CLEAR_REPORTS_TO = By.xpath("//label[text()='Reports To']/../div//button/lightning-primitive-icon");
     private static final By INPUT_REPORTS_TO = By.xpath("//input[@placeholder='Search Contacts...']");
-
-    private static final By INPUT_TITLE = By.xpath("//input[@name='Title']");
-    private static final By INPUT_EMAIL = By.xpath("//input[@name='Email']");
-    private static final By INPUT_PHONE = By.xpath("//input[@name='Phone']");
-    private static final By INPUT_MOBILE = By.xpath("//input[@name='MobilePhone']");
-    private static final By INPUT_DEPARTMENT = By.xpath("//input[@name='Department']");
-    private static final By INPUT_FAX = By.xpath("//input[@name='Fax']");
-    private static final By INPUT_STREET = By.xpath("//textarea[@name='street']");
-    private static final By INPUT_CITY = By.xpath("//input[@name='city']");
-    private static final By INPUT_STATE = By.xpath("//input[@name='province']");
-    private static final By INPUT_ZIP = By.xpath("//input[@name='postalCode']");
-    private static final By INPUT_COUNTRY = By.xpath("//input[@name='country']");
 
     private static final By FIELD_NAME = By.xpath("//div/span[text()='Name']/../../div[2]/span/slot/slot/lightning-formatted-name");
     private static final By FIELD_ACCOUNT_NAME = By.xpath("//span[text()='Account Name']/../../div[2]//a");
@@ -47,6 +33,7 @@ public class ContactViewPage extends BasePage {
     private static final By FIELD_ADDRESS_STREET = By.xpath("//span[text()='Mailing Address']/../../div[2]//a/div[1]");
     private static final By FIELD_ADDRESS_CITY_STATE_ZIP = By.xpath("//span[text()='Mailing Address']/../../div[2]//a/div[2]");
     private static final By FIELD_ADDRESS_COUNTRY = By.xpath("//span[text()='Mailing Address']/../../div[2]//a/div[3]");
+    private static final By BUTTON_SAVE = By.xpath("//button[@title='Save']");
 
     public ContactViewPage(WebDriver driver) {
         super(driver);
@@ -56,52 +43,37 @@ public class ContactViewPage extends BasePage {
         driver.get("https://ap16.lightning.force.com/lightning/r/Contact/0032w00000I4v9iAAB/view");
         driver.findElement(TAB_DETAILS).click();
         driver.findElement(FIELD_NAME_EDIT).click();
-
         driver.findElement(DROPDOWN_SALUTATION).click();
-        driver.findElement(By.xpath(String.format("//span[text()='%s']", contact.getSalutation()))).click();
-        driver.findElement(INPUT_FIRST_NAME).clear();
-        driver.findElement(INPUT_FIRST_NAME).sendKeys(contact.getFirstName());
-        driver.findElement(INPUT_MIDDLE_NAME).clear();
-        driver.findElement(INPUT_MIDDLE_NAME).sendKeys(contact.getMiddleName());
-        driver.findElement(INPUT_LAST_NAME).clear();
-        driver.findElement(INPUT_LAST_NAME).sendKeys(contact.getLastName());
-        driver.findElement(INPUT_SUFFIX).clear();
-        driver.findElement(INPUT_SUFFIX).sendKeys(contact.getSuffix());
+
+        //the following action is failed sometime, in 10% of cases
+        driver.findElement(By.xpath(String.format("//span[@title='%s']", contact.getSalutation()))).click();
+
+        new TextInput(driver, "First Name", contact.getFirstName()).fillInput();
+        new TextInput(driver, "Middle Name", contact.getMiddleName()).fillInput();
+        new TextInput(driver, "Last Name", contact.getLastName()).fillInput();
+        new TextInput(driver, "Suffix", contact.getSuffix()).fillInput();
 
         driver.findElement(BUTTON_CLEAR_ACCOUNT_NAME).click();
-        driver.findElement(By.cssSelector(String.format("span[title='%s']", contact.getAccountName()))).click();
-        driver.findElement(INPUT_SEARCH_ACCOUNT).sendKeys(contact.getAccountName());
-        driver.findElement(By.cssSelector(String.format("span[title='%s']", contact.getReportsTo()))).click();
-
+        driver.findElement(INPUT_SEARCH_ACCOUNT).click();
+        driver.findElement(By.xpath(String.format("//span[@title='%s']", contact.getAccountName()))).click();
         driver.findElement(BUTTON_CLEAR_REPORTS_TO).click();
-        driver.findElement(INPUT_REPORTS_TO).sendKeys(contact.getReportsTo());
+        driver.findElement(INPUT_REPORTS_TO).click();
+        driver.findElement(By.xpath(String.format("//span[@title='%s']", contact.getReportsTo()))).click();
 
-        driver.findElement(INPUT_TITLE).clear();
-        driver.findElement(INPUT_TITLE).sendKeys(contact.getTitle());
-        driver.findElement(INPUT_EMAIL).clear();
-        driver.findElement(INPUT_EMAIL).sendKeys(contact.getEmail());
-        driver.findElement(INPUT_PHONE).clear();
-        driver.findElement(INPUT_PHONE).sendKeys(contact.getPhone());
-        driver.findElement(INPUT_MOBILE).clear();
-        driver.findElement(INPUT_MOBILE).sendKeys(contact.getMobile());
-        driver.findElement(INPUT_DEPARTMENT).clear();
-        driver.findElement(INPUT_DEPARTMENT).sendKeys(contact.getDepartment());
-        driver.findElement(INPUT_FAX).clear();
-        driver.findElement(INPUT_FAX).sendKeys(contact.getFax());
+        new TextInput(driver, "Title", contact.getTitle()).fillInput();
+        new TextInput(driver, "Email", contact.getEmail()).fillInput();
+        new TextInput(driver, "Phone", contact.getPhone()).fillInput();
+        new TextInput(driver, "Mobile", contact.getMobile()).fillInput();
+        new TextInput(driver, "Department", contact.getDepartment()).fillInput();
+        new TextInput(driver, "Fax", contact.getFax()).fillInput();
+        new TextArea(driver, "Mailing Street", contact.getMailingStreet()).fillTextArea();
+        new TextInput(driver, "Mailing City", contact.getMailingCity()).fillInput();
+        new TextInput(driver, "Mailing State/Province", contact.getMailingState()).fillInput();
+        new TextInput(driver, "Mailing Zip/Postal Code", contact.getMailingZip()).fillInput();
+        new TextInput(driver, "Mailing Country", contact.getMailingCountry()).fillInput();
 
-        driver.findElement(INPUT_STREET).clear();
-        driver.findElement(INPUT_STREET).sendKeys(contact.getMailingStreet());
-        driver.findElement(INPUT_CITY).clear();
-        driver.findElement(INPUT_CITY).sendKeys(contact.getMailingCity());
-        driver.findElement(INPUT_STATE).clear();
-        driver.findElement(INPUT_STATE).sendKeys(contact.getMailingState());
-        driver.findElement(INPUT_ZIP).clear();
-        driver.findElement(INPUT_ZIP).sendKeys(contact.getMailingZip());
-        driver.findElement(INPUT_COUNTRY).clear();
-        driver.findElement(INPUT_COUNTRY).sendKeys(contact.getMailingCountry());
-
-        driver.findElement(By.xpath("Test"));
-
+        driver.findElement(BUTTON_SAVE).click();
+        wait.until(ExpectedConditions.presenceOfElementLocated(FIELD_NAME_EDIT));
     }
 
     public void validateContactData(Contact contact) {

@@ -34,8 +34,8 @@ public class ContactSteps {
     }
 
     public void updateContact(Contact contact_original, Contact contact_updated) {
-        //contactListPage.openPage();
-        //contactListPage.openContact(contact_original);
+        contactListPage.openPage();
+        contactListPage.openContact(contact_original);
         contactViewPage.updateOpenContact(contact_updated);
     }
 

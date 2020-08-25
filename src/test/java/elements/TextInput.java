@@ -7,17 +7,15 @@ import org.openqa.selenium.WebElement;
 public class TextInput {
     private WebDriver driver;
     private String title;
-    private String text;
     private static final String INPUT_LOCATOR = "//label[text()='%s']/..//input";
 
-    public TextInput(WebDriver driver, String title, String text) {
+    public TextInput(WebDriver driver, String title) {
         this.driver = driver;
         this.title = title;
-        this.text = text;
     }
 
-    public void fillInput() {
-        System.out.println(String.format("Writing text '%s' to the filed with label '%s'", text, title));
+    public void fillInput(String text) {
+        System.out.println(String.format("Writing '%s' text to field with '%s' label", text, title));
         WebElement element = driver.findElement(By.xpath(String.format(INPUT_LOCATOR, title)));
         element.clear();
         element.sendKeys(text);

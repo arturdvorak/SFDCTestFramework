@@ -3,7 +3,6 @@ package tests;
 import com.github.javafaker.Faker;
 import models.Contact;
 import org.testng.annotations.Test;
-import java.util.Date;
 import java.util.Locale;
 
 public class ContactTest extends BaseTest {
@@ -19,7 +18,7 @@ public class ContactTest extends BaseTest {
             .email(usFaker.internet().emailAddress())
             .phone(usFaker.phoneNumber().cellPhone())
             .mobile(usFaker.phoneNumber().cellPhone())
-            .reportsTo("1HeadContact")
+            .reportsTo("HeadContact1")
             .department("Test Department")
             .fax(usFaker.phoneNumber().cellPhone())
             .mailingStreet(usFaker.address().streetName())
@@ -54,10 +53,10 @@ public class ContactTest extends BaseTest {
     public void createAndRemoveContact() {
         loginSteps.open(login_url);
         loginSteps.login(username, password);
-        //contactSteps.createNewContact(contact_original);
-        //contactSteps.validationOfContact(contact_original);
+        contactSteps.createNewContact(contact_original);
+        contactSteps.validationOfContact(contact_original);
         contactSteps.updateContact(contact_original, contact_updated);
         contactSteps.validationOfContact(contact_updated);
-        //contactSteps.removeAccount(contact_to_update);
+        contactSteps.removeAccount(contact_updated);
     }
 }

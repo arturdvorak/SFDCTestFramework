@@ -4,11 +4,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 public abstract class BasePage {
-    LoginPage loginPage;
-    HomePage homePage;
-    ContactListPage contactListPage;
-    ContactPage contactPage;
-    NewContactModal newContactModal;
     protected WebDriver driver;
     protected WebDriverWait wait;
 

@@ -6,12 +6,10 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
 public class ContactListPage extends BasePage {
-    private static final String URL_CONTACT_TAB = "https://na111.lightning.force.com/lightning/o/Contact/list";
+    private static final String URL_CONTACT_TAB = "https://ap16.lightning.force.com/lightning/o/Contact/list";
     private static final By BUTTON_NEW = By.cssSelector("a[title='New']");
-    private static final By BANNER_CONTACTS = By.cssSelector("img[title='Contacts']");
-    private static final By TITLE_CONTACTS = By.cssSelector("//li/span[text()='Contacts']");
-    private static final By TITLE_CONTACT = By.xpath("//h1/div[text()='Contact']");
-    private static final By FRAME_NEW_CONTACT_MODAL = By.cssSelector("div[class='isModal inlinePanel oneRecordActionWrapper']");
+    private static final By TITLE_CONTACT_IN_PANEL = By.xpath("//h1/div[text()='Account']");
+    private static final By TITLE_NEW_CONTACT_IN_MODAL = By.xpath("//h2[text()='New Account']");
 
     public ContactListPage(WebDriver driver) {
         super(driver);
@@ -23,7 +21,7 @@ public class ContactListPage extends BasePage {
 
     public void openNewContactModal() {
         driver.findElement(BUTTON_NEW).click();
-        wait.until(ExpectedConditions.visibilityOf(driver.findElement(FRAME_NEW_CONTACT_MODAL)));
+        wait.until(ExpectedConditions.visibilityOf(driver.findElement(TITLE_NEW_CONTACT_IN_MODAL)));
     }
 
     public String getContactLink(Contact contact) {
@@ -37,6 +35,6 @@ public class ContactListPage extends BasePage {
 
     public void openContact(Contact contact) {
         driver.get(getContactLink(contact));
-        wait.until(ExpectedConditions.visibilityOfElementLocated(TITLE_CONTACT));
+        wait.until(ExpectedConditions.visibilityOfElementLocated(TITLE_CONTACT_IN_PANEL));
     }
 }

@@ -6,9 +6,10 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
 public class ContactListPage extends BasePage {
-    private static final String UTL_CONTACT_TAB = "https://na111.lightning.force.com/lightning/o/Contact/list";
+    private static final String URL_CONTACT_TAB = "https://na111.lightning.force.com/lightning/o/Contact/list";
     private static final By BUTTON_NEW = By.cssSelector("a[title='New']");
-    private static final By BANNER_CONTACT = By.cssSelector("img[title='Contact']");
+    private static final By BANNER_CONTACTS = By.cssSelector("img[title='Contacts']");
+    private static final By TITLE_CONTACTS = By.cssSelector("//li/span[text()='Contacts']");
     private static final By TITLE_CONTACT = By.xpath("//h1/div[text()='Contact']");
     private static final By FRAME_NEW_CONTACT_MODAL = By.cssSelector("div[class='isModal inlinePanel oneRecordActionWrapper']");
 
@@ -16,7 +17,7 @@ public class ContactListPage extends BasePage {
         super(driver);
     }
     public void openPage() {
-        driver.get(UTL_CONTACT_TAB);
+        driver.get(URL_CONTACT_TAB);
     }
 
     public void openNewContactModal() {

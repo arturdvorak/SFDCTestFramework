@@ -5,14 +5,11 @@ import org.openqa.selenium.WebDriver;
 
 import static org.testng.Assert.assertEquals;
 
-public class TextFieldAsLink {
-    private WebDriver driver;
-    private String title;
+public class TextFieldAsLink extends BaseElement {
     private static final String FIELD_LOCATOR = "//span[text()='%s']/../../div[2]//a";
 
     public TextFieldAsLink(WebDriver driver, String title) {
-        this.driver = driver;
-        this.title = title;
+        super(driver, title);
     }
 
     public void validateFieldValue(String text) {

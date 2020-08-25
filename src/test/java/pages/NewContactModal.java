@@ -1,5 +1,9 @@
 package pages;
 
+import elements.DropDown;
+import elements.DropDownWithSearch;
+import elements.TextArea;
+import elements.TextInput;
 import models.Contact;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -7,31 +11,6 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 
 public class NewContactModal extends BasePage {
     private static final By BANNER_CONTACT = By.cssSelector("img[title='Contact']");
-
-    private static final By DROPDOWN_SALUTATION = By.cssSelector("div[class='uiPopupTrigger']");
-    private static final By INPUT_FIRST_NAME = By.cssSelector("input[placeholder='First Name']");
-    private static final By INPUT_MIDDLE_NAME = By.cssSelector("input[placeholder='Middle Name']");
-    private static final By INPUT_LAST_NAME = By.cssSelector("input[placeholder='Last Name']");
-    private static final By INPUT_SUFFIX = By.cssSelector("input[placeholder='Suffix']");
-
-    private static final By FIELD_SEARCH_ACCOUNT = By.cssSelector("input[title='Search Accounts']");
-
-    private static final By INPUT_TITLE = By.xpath("//span[text() = 'Title']/../../input");
-    private static final By INPUT_EMAIL = By.xpath("//span[text() = 'Email']/../../input");
-    private static final By INPUT_PHONE = By.xpath("//span[text() = 'Phone']/../../input");
-    private static final By INPUT_MOBILE = By.xpath("//span[text() = 'Mobile']/../../input");
-
-    private static final By DROPDOWN_REPORT_TO = By.cssSelector("input[Title='Search Contacts']");
-
-    private static final By INPUT_DEPARTMENT = By.xpath("//span[text() = 'Department']/../../input");
-    private static final By INPUT_FAX = By.xpath("//span[text() = 'Fax']/../../input");
-
-    private static final By INPUT_MAILING_STREET = By.cssSelector("textarea[placeholder='Mailing Street']");
-    private static final By INPUT_MAILING_CITY = By.cssSelector("input[placeholder='Mailing City']");
-    private static final By INPUT_MAILING_STATE = By.cssSelector("input[placeholder='Mailing State/Province']");
-    private static final By INPUT_MAILING_ZIP = By.cssSelector("input[placeholder='Mailing Zip/Postal Code']");
-    private static final By INPUT_MAILING_COUNTRY = By.cssSelector("input[placeholder='Mailing Country']");
-
     private static final By BUTTON_SAVE = By.cssSelector("button[title='Save']");
 
     public NewContactModal(WebDriver driver) {
@@ -39,31 +18,26 @@ public class NewContactModal extends BasePage {
     }
 
     public void fillOutNewContactModal(Contact contact) {
-        driver.findElement(DROPDOWN_SALUTATION).click();
-        driver.findElement(By.xpath(String.format("//a[text()='%s']", contact.getSalutation()))).click();
-        driver.findElement(INPUT_FIRST_NAME).sendKeys(contact.getFirstName());
-        driver.findElement(INPUT_MIDDLE_NAME).sendKeys(contact.getMiddleName());
-        driver.findElement(INPUT_LAST_NAME).sendKeys(contact.getLastName());
-        driver.findElement(INPUT_SUFFIX).sendKeys(contact.getSuffix());
-        driver.findElement(FIELD_SEARCH_ACCOUNT).click();
-        driver.findElement(By.cssSelector(String.format("div[title='%s']", contact.getAccountName()))).click();
+        new DropDown(driver, "Salutation").fillInput(contact.getSalutation());
+        new TextInput(driver, "First Name").fillInput(contact.getFirstName());
+        new TextInput(driver, "Middle Name").fillInput(contact.getMiddleName());
+        new TextInput(driver, "Last Name").fillInput(contact.getLastName());
+        new TextInput(driver, "Suffix").fillInput(contact.getSuffix());
 
-        driver.findElement(INPUT_TITLE).sendKeys(contact.getTitle());
-        driver.findElement(INPUT_EMAIL).sendKeys(contact.getEmail());
-        driver.findElement(INPUT_PHONE).sendKeys(contact.getPhone());
-        driver.findElement(INPUT_MOBILE).sendKeys(contact.getMobile());
+        new DropDownWithSearch(driver, "Account Name").fillInput(contact.getAccountName());
+        new DropDownWithSearch(driver, "Reports To").fillInput(contact.getReportsTo());
 
-        driver.findElement(DROPDOWN_REPORT_TO).click();
-        driver.findElement(By.cssSelector(String.format("div[title='%s']", contact.getReportsTo()))).click();
-
-        driver.findElement(INPUT_DEPARTMENT).sendKeys(contact.getDepartment());
-        driver.findElement(INPUT_FAX).sendKeys(contact.getFax());
-
-        driver.findElement(INPUT_MAILING_STREET).sendKeys(contact.getMailingStreet());
-        driver.findElement(INPUT_MAILING_CITY).sendKeys(contact.getMailingCity());
-        driver.findElement(INPUT_MAILING_STATE).sendKeys(contact.getMailingState());
-        driver.findElement(INPUT_MAILING_ZIP).sendKeys(contact.getMailingZip());
-        driver.findElement(INPUT_MAILING_COUNTRY).sendKeys(contact.getMailingCountry());
+        new TextInput(driver, "Title").fillInput(contact.getTitle());
+        new TextInput(driver, "Email").fillInput(contact.getEmail());
+        new TextInput(driver, "Phone").fillInput(contact.getPhone());
+        new TextInput(driver, "Mobile").fillInput(contact.getMobile());
+        new TextInput(driver, "Department").fillInput(contact.getDepartment());
+        new TextInput(driver, "Fax").fillInput(contact.getFax());
+        new TextArea(driver, "Mailing Street").fillInput(contact.getMailingStreet());
+        new TextInput(driver, "Mailing City").fillInput(contact.getMailingCity());
+        new TextInput(driver, "Mailing State/Province").fillInput(contact.getMailingState());
+        new TextInput(driver, "Mailing Zip/Postal Code").fillInput(contact.getMailingZip());
+        new TextInput(driver, "Mailing Country").fillInput(contact.getMailingCountry());
     }
 
     public void saveContact() {

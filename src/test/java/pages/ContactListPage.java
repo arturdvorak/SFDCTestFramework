@@ -16,6 +16,7 @@ public class ContactListPage extends BasePage {
     public ContactListPage(WebDriver driver) {
         super(driver);
     }
+
     public void openPage() {
         driver.get(URL_CONTACT_TAB);
     }

@@ -6,10 +6,10 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
 public class ContactListPage extends BasePage {
-    private static final String URL_CONTACT_TAB = "https://ap16.lightning.force.com/lightning/o/Contact/list";
+    private final String URL_CONTACT_TAB = base_url + "o/Contact/list";
     private static final By BUTTON_NEW = By.cssSelector("a[title='New']");
-    private static final By TITLE_CONTACT_IN_PANEL = By.xpath("//h1/div[text()='Account']");
-    private static final By TITLE_NEW_CONTACT_IN_MODAL = By.xpath("//h2[text()='New Account']");
+    private static final By TITLE_CONTACT_IN_PANEL = By.xpath("//h1/div[text()='Contact']");
+    private static final By TITLE_NEW_CONTACT_IN_MODAL = By.xpath("//h2[text()='New Contact']");
 
     public ContactListPage(WebDriver driver) {
         super(driver);

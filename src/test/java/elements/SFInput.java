@@ -4,10 +4,10 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-public class TextInputByLabel extends BaseElement {
-    private static final String INPUT_LOCATOR = "//label[text()='%s']/..//input";
+public class SFInput extends BaseElement {
+    private static final String INPUT_LOCATOR = "//span[text()='%s']/ancestor::div[contains(@Class, 'uiInput')]//input";
 
-    public TextInputByLabel(WebDriver driver, String title) {
+    public SFInput(WebDriver driver, String title) {
         super(driver, title);
     }
 
@@ -17,5 +17,4 @@ public class TextInputByLabel extends BaseElement {
         element.clear();
         element.sendKeys(text);
     }
-
 }

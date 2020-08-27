@@ -18,25 +18,25 @@ public class NewAccountModal extends BasePage {
     public void fillOutNewContactModal(Account account) {
         driver.findElement(INPUT_ACCOUNT_NAME).sendKeys(account.getAccountName());
 
-        new DropDownWithSearch(driver, "Parent Account").fillInput(account.getParentAccount());
-        new DropDown(driver, "Type").fillInput(account.getType());
-        new DropDown(driver, "Industry").fillInput(account.getIndustry());
+        new SFLookUp(driver, "Parent Account").select(account.getParentAccount());
+        new SFDropDown(driver, "Type").select(account.getType());
+        new SFDropDown(driver, "Industry").select(account.getIndustry());
 
-        new TextInput(driver, "Website").fillInput(account.getWebsite());
+        new SFInput(driver, "Website").fillInput(account.getWebsite());
         new TextArea(driver, "Description").fillInput(account.getDescription());
-        new TextInput(driver, "Phone").fillInput(account.getPhone());
-        new TextInput(driver, "Employees").fillInput(Integer.toString(account.getEmployees()));
+        new SFInput(driver, "Phone").fillInput(account.getPhone());
+        new SFInput(driver, "Employees").fillInput(Integer.toString(account.getEmployees()));
 
         new TextArea(driver, "Billing Street").fillInput(account.getBillingStreet());
-        new TextInput(driver, "Billing City").fillInput(account.getBillingCity());
-        new TextInput(driver, "Billing State/Province").fillInput(account.getBillingState());
-        new TextInput(driver, "Billing Zip/Postal Code").fillInput(account.getBillingZip());
-        new TextInput(driver, "Billing Country").fillInput(account.getBillingCountry());
+        new SFInput(driver, "Billing City").fillInput(account.getBillingCity());
+        new SFInput(driver, "Billing State/Province").fillInput(account.getBillingState());
+        new SFInput(driver, "Billing Zip/Postal Code").fillInput(account.getBillingZip());
+        new SFInput(driver, "Billing Country").fillInput(account.getBillingCountry());
         new TextArea(driver, "Shipping Street").fillInput(account.getMailingStreet());
-        new TextInput(driver, "Shipping City").fillInput(account.getMailingCity());
-        new TextInput(driver, "Shipping State/Province").fillInput(account.getMailingState());
-        new TextInput(driver, "Shipping Zip/Postal Code").fillInput(account.getMailingZip());
-        new TextInput(driver, "Shipping Country").fillInput(account.getMailingCountry());
+        new SFInput(driver, "Shipping City").fillInput(account.getMailingCity());
+        new SFInput(driver, "Shipping State/Province").fillInput(account.getMailingState());
+        new SFInput(driver, "Shipping Zip/Postal Code").fillInput(account.getMailingZip());
+        new SFInput(driver, "Shipping Country").fillInput(account.getMailingCountry());
     }
 
     public void saveAccount() {

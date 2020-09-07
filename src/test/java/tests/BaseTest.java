@@ -3,6 +3,7 @@ package tests;
 import driver.WebDriverSingleton;
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.AfterClass;
+import steps.AccountSteps;
 import steps.ContactSteps;
 import steps.HomeSteps;
 import steps.LoginSteps;
@@ -20,6 +21,7 @@ public abstract class BaseTest {
     LoginSteps loginSteps;
     HomeSteps homeSteps;
     ContactSteps contactSteps;
+    AccountSteps accountSteps;
 
     @BeforeClass(description = "Init browser")
     public void setUp() {
@@ -28,6 +30,7 @@ public abstract class BaseTest {
         loginSteps = new LoginSteps(driver);
         homeSteps = new HomeSteps(driver);
         contactSteps = new ContactSteps(driver);
+        accountSteps = new AccountSteps(driver);
 
         base_url = propertiesReader.getValue("BASE_URL");
         login_url = propertiesReader.getValue("LOGIN_URL");

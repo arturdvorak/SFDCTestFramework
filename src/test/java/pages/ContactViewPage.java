@@ -1,8 +1,6 @@
 package pages;
 
-import elements.TextArea;
-import elements.TextFieldAsLink;
-import elements.TextInput;
+import elements.*;
 import models.Contact;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -13,22 +11,12 @@ import static org.testng.Assert.assertEquals;
 public class ContactViewPage extends BasePage {
     private static final By TAB_DETAILS = By.xpath("//a[@data-label='Details' and @tabindex='-1']");
     private static final By FIELD_NAME_EDIT = By.xpath("//div/span[text()='Name']/../..//button");
-
-    private static final By DROPDOWN_SALUTATION = By.xpath("//input[@name='salutation']");
-
-    private static final By BUTTON_CLEAR_ACCOUNT_NAME = By.xpath("//label[text()='Account Name']/../div//button/lightning-primitive-icon");
-    private static final By INPUT_SEARCH_ACCOUNT = By.xpath("//input[@placeholder='Search Accounts...']");
-
-    private static final By BUTTON_CLEAR_REPORTS_TO = By.xpath("//label[text()='Reports To']/../div//button/lightning-primitive-icon");
-    private static final By INPUT_REPORTS_TO = By.xpath("//input[@placeholder='Search Contacts...']");
-
     private static final By FIELD_NAME = By.xpath("//div/span[text()='Name']/../../div[2]/span/slot/slot/lightning-formatted-name");
     private static final By FIELD_TITLE = By.xpath("//span[text()='Title']/../../div[2]/span/slot/slot/lightning-formatted-text");
     private static final By FIELD_DEPARTMENT = By.xpath("//span[text()='Department']/../../div[2]/span/slot/slot/lightning-formatted-text");
     private static final By FIELD_ADDRESS_STREET = By.xpath("//span[text()='Mailing Address']/../../div[2]//a/div[1]");
     private static final By FIELD_ADDRESS_CITY_STATE_ZIP = By.xpath("//span[text()='Mailing Address']/../../div[2]//a/div[2]");
     private static final By FIELD_ADDRESS_COUNTRY = By.xpath("//span[text()='Mailing Address']/../../div[2]//a/div[3]");
-
     private static final By BUTTON_SAVE = By.xpath("//button[@title='Save']");
 
     public ContactViewPage(WebDriver driver) {
@@ -38,34 +26,28 @@ public class ContactViewPage extends BasePage {
     public void updateOpenContact(Contact contact) {
         driver.findElement(TAB_DETAILS).click();
         driver.findElement(FIELD_NAME_EDIT).click();
-        driver.findElement(DROPDOWN_SALUTATION).click();
 
-        //the following action is failed sometime, in 10% of cases
-        driver.findElement(By.xpath(String.format("//span[@title='%s']", contact.getSalutation()))).click();
+        new LightningDropDown(driver, "Salutation").select(contact.getSalutation());
 
-        new TextInput(driver, "First Name").fillInput(contact.getFirstName());
-        new TextInput(driver, "Middle Name").fillInput(contact.getMiddleName());
-        new TextInput(driver, "Last Name").fillInput(contact.getLastName());
-        new TextInput(driver, "Suffix").fillInput(contact.getSuffix());
+        new LightningInput(driver, "First Name").fillInput(contact.getFirstName());
+        new LightningInput(driver, "Middle Name").fillInput(contact.getMiddleName());
+        new LightningInput(driver, "Last Name").fillInput(contact.getLastName());
+        new LightningInput(driver, "Suffix").fillInput(contact.getSuffix());
 
-        driver.findElement(BUTTON_CLEAR_ACCOUNT_NAME).click();
-        driver.findElement(INPUT_SEARCH_ACCOUNT).click();
-        driver.findElement(By.xpath(String.format("//span[@title='%s']", contact.getAccountName()))).click();
-        driver.findElement(BUTTON_CLEAR_REPORTS_TO).click();
-        driver.findElement(INPUT_REPORTS_TO).click();
-        driver.findElement(By.xpath(String.format("//span[@title='%s']", contact.getReportsTo()))).click();
+        new LightningLookUp(driver, "Account Name").select(contact.getAccountName());
+        new LightningLookUp(driver, "Reports To").select(contact.getReportsTo());
 
-        new TextInput(driver, "Title").fillInput(contact.getTitle());
-        new TextInput(driver, "Email").fillInput(contact.getEmail());
-        new TextInput(driver, "Phone").fillInput(contact.getPhone());
-        new TextInput(driver, "Mobile").fillInput(contact.getMobile());
-        new TextInput(driver, "Department").fillInput(contact.getDepartment());
-        new TextInput(driver, "Fax").fillInput(contact.getFax());
-        new TextArea(driver, "Mailing Street").fillTextArea(contact.getMailingStreet());
-        new TextInput(driver, "Mailing City").fillInput(contact.getMailingCity());
-        new TextInput(driver, "Mailing State/Province").fillInput(contact.getMailingState());
-        new TextInput(driver, "Mailing Zip/Postal Code").fillInput(contact.getMailingZip());
-        new TextInput(driver, "Mailing Country").fillInput(contact.getMailingCountry());
+        new LightningInput(driver, "Title").fillInput(contact.getTitle());
+        new LightningInput(driver, "Email").fillInput(contact.getEmail());
+        new LightningInput(driver, "Phone").fillInput(contact.getPhone());
+        new LightningInput(driver, "Mobile").fillInput(contact.getMobile());
+        new LightningInput(driver, "Department").fillInput(contact.getDepartment());
+        new LightningInput(driver, "Fax").fillInput(contact.getFax());
+        new TextArea(driver, "Mailing Street").fillInput(contact.getMailingStreet());
+        new LightningInput(driver, "Mailing City").fillInput(contact.getMailingCity());
+        new LightningInput(driver, "Mailing State/Province").fillInput(contact.getMailingState());
+        new LightningInput(driver, "Mailing Zip/Postal Code").fillInput(contact.getMailingZip());
+        new LightningInput(driver, "Mailing Country").fillInput(contact.getMailingCountry());
 
         driver.findElement(BUTTON_SAVE).click();
         wait.until(ExpectedConditions.presenceOfElementLocated(FIELD_NAME_EDIT));
@@ -81,12 +63,12 @@ public class ContactViewPage extends BasePage {
                         + contact.getSuffix(),
                 "Name is saved incorrectly.");
 
-        new TextFieldAsLink(driver, "Account Name").validateFieldValue(contact.getAccountName());
-        new TextFieldAsLink(driver, "Email").validateFieldValue(contact.getEmail());
-        new TextFieldAsLink(driver, "Phone").validateFieldValue(contact.getPhone());
-        new TextFieldAsLink(driver, "Mobile").validateFieldValue(contact.getMobile());
-        new TextFieldAsLink(driver, "Reports To").validateFieldValue(contact.getReportsTo());
-        new TextFieldAsLink(driver, "Fax").validateFieldValue(contact.getFax());
+        new ForceRecord(driver, "Account Name").validateFieldValue(contact.getAccountName());
+        new ForceRecord(driver, "Email").validateFieldValue(contact.getEmail());
+        new ForceRecord(driver, "Phone").validateFieldValue(contact.getPhone());
+        new ForceRecord(driver, "Mobile").validateFieldValue(contact.getMobile());
+        new ForceRecord(driver, "Reports To").validateFieldValue(contact.getReportsTo());
+        new ForceRecord(driver, "Fax").validateFieldValue(contact.getFax());
 
         assertEquals(driver.findElement(FIELD_TITLE).getText(), contact.getTitle(),
                 "Title is saved incorrectly.");

@@ -7,7 +7,7 @@ import java.util.Locale;
 
 public class ContactTest extends BaseTest {
     Faker usFaker = new Faker(new Locale("en-US"));
-    Contact contact_original = Contact.builder()
+    Contact contact = Contact.builder()
             .salutation("Mr.")
             .firstName(usFaker.name().firstName())
             .middleName("Test")
@@ -53,9 +53,9 @@ public class ContactTest extends BaseTest {
     public void createAndRemoveContact() {
         loginSteps.open(login_url);
         loginSteps.login(username, password);
-        contactSteps.createNewContact(contact_original);
-        contactSteps.validationOfContact(contact_original);
-        contactSteps.updateContact(contact_original, contact_updated);
+        contactSteps.createNewContact(contact);
+        contactSteps.validationOfContact(contact);
+        contactSteps.updateContact(contact, contact_updated);
         contactSteps.validationOfContact(contact_updated);
         contactSteps.removeAccount(contact_updated);
     }

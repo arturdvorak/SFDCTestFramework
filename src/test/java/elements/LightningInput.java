@@ -5,7 +5,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 public class LightningInput extends BaseElement {
-    private static final String INPUT_LOCATOR = "//label[text()='First Name']/ancestor::lightning-input//input";
+    private static final String INPUT_LOCATOR = "//label[text()='%s']/ancestor::lightning-input//input";
 
     public LightningInput(WebDriver driver, String title) {
         super(driver, title);

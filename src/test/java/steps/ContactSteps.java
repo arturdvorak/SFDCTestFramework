@@ -33,9 +33,9 @@ public class ContactSteps {
         contactViewPage.validateContactData(contact);
     }
 
-    public void updateContact(Contact contact_original, Contact contact_updated) {
+    public void updateContact(Contact contact, Contact contact_updated) {
         contactListPage.openPage();
-        contactListPage.openContact(contact_original);
+        contactListPage.openContact(contact);
         contactViewPage.updateOpenContact(contact_updated);
     }
 

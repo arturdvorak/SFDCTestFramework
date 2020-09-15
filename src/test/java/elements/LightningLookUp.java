@@ -1,8 +1,11 @@
 package elements;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+
+import java.util.concurrent.TimeUnit;
 
 import static org.testng.Assert.assertEquals;
 
@@ -18,11 +21,18 @@ public class LightningLookUp extends BaseElement {
 
     public void select(String text) {
         System.out.println(String.format("Select '%s' value from '%s' drop-down", text, title));
-        if (driver.findElement(By.xpath(String.format(DROPDOWN_REMOVE_BUTTON, title))) != null) {
-            driver.findElement(By.xpath(String.format(DROPDOWN_REMOVE_BUTTON, title))).click();
+        JavascriptExecutor executor = (JavascriptExecutor)driver;
+
+        driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
+        if (driver.findElements(By.xpath(String.format(DROPDOWN_REMOVE_BUTTON, title))).size() > 0) {
+            WebElement elementRemoveButton = driver.findElement(By.xpath(String.format(DROPDOWN_REMOVE_BUTTON, title)));
+            executor.executeScript("arguments[0].click();", elementRemoveButton);
         }
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+
         WebElement lightningLookUp = driver.findElement(By.xpath(String.format(DROPDOWN_LOCATOR, title)));
-        lightningLookUp.click();
-        lightningLookUp.findElement(By.xpath(String.format(DROPDOWN_VALUE, title, text))).click();
+        executor.executeScript("arguments[0].click();", lightningLookUp);
+        WebElement lightningLookUpValue = driver.findElement(By.xpath(String.format(DROPDOWN_VALUE, title, text)));
+        executor.executeScript("arguments[0].click();", lightningLookUpValue);
     }
 }

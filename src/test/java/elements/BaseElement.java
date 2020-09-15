@@ -7,6 +7,7 @@ public class BaseElement {
     protected WebDriver driver;
     protected String title;
     protected WebDriverWait wait;
+    protected final static String ACTIVE_TAB_LOCATOR = "//div[contains(@class,'active')]";
 
     public BaseElement(WebDriver driver, String title) {
         this.driver = driver;

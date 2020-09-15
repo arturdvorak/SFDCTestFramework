@@ -1,9 +1,6 @@
 package pages;
 
-import elements.SFDropDown;
-import elements.SFLookUp;
-import elements.TextArea;
-import elements.SFInput;
+import elements.*;
 import models.Contact;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -18,15 +15,14 @@ public class NewContactModal extends BasePage {
     }
 
     public void fillOutNewContactModal(Contact contact) {
+        waitForPageLoaded();
         new SFDropDown(driver, "Salutation").select(contact.getSalutation());
         new SFInput(driver, "First Name").fillInput(contact.getFirstName());
         new SFInput(driver, "Middle Name").fillInput(contact.getMiddleName());
         new SFInput(driver, "Last Name").fillInput(contact.getLastName());
         new SFInput(driver, "Suffix").fillInput(contact.getSuffix());
-
         new SFLookUp(driver, "Account Name").select(contact.getAccountName());
         new SFLookUp(driver, "Reports To").select(contact.getReportsTo());
-
         new SFInput(driver, "Title").fillInput(contact.getTitle());
         new SFInput(driver, "Email").fillInput(contact.getEmail());
         new SFInput(driver, "Phone").fillInput(contact.getPhone());
@@ -41,7 +37,7 @@ public class NewContactModal extends BasePage {
     }
 
     public void saveContact() {
-        driver.findElement(BUTTON_SAVE).click();
+        new Button(driver,"Save").click();
         wait.until(ExpectedConditions.presenceOfElementLocated(BANNER_CONTACT));
     }
 }

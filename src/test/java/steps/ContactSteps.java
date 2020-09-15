@@ -3,20 +3,17 @@ package steps;
 import models.Contact;
 import org.openqa.selenium.WebDriver;
 import pages.ContactListPage;
-import pages.ContactPage;
 import pages.ContactViewPage;
 import pages.NewContactModal;
 
 public class ContactSteps {
     ContactListPage contactListPage;
     NewContactModal newContactModal;
-    ContactPage contactPage;
     ContactViewPage contactViewPage;
 
     public ContactSteps(WebDriver driver) {
         contactListPage = new ContactListPage(driver);
         newContactModal = new NewContactModal(driver);
-        contactPage = new ContactPage(driver);
         contactViewPage = new ContactViewPage(driver);
     }
 
@@ -39,9 +36,9 @@ public class ContactSteps {
         contactViewPage.updateOpenContact(contact_updated);
     }
 
-    public void removeAccount(Contact contact) {
+    public void removeContact(Contact contact) {
         contactListPage.openPage();
         contactListPage.openContact(contact);
-        contactPage.deleteOpenedContact();
+        contactViewPage.deleteOpenedContact();
     }
 }

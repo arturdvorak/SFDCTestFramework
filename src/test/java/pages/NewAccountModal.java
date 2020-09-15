@@ -8,25 +8,21 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 
 public class NewAccountModal extends BasePage {
     private static final By BANNER_ACCOUNT = By.cssSelector("img[title='Account']");
-    private static final By BUTTON_SAVE = By.cssSelector("button[title='Save']");
-    private static final By INPUT_ACCOUNT_NAME = By.xpath("//label/span[text()='Account Name']/../..//input");
 
     public NewAccountModal(WebDriver driver) {
         super(driver);
     }
 
     public void fillOutNewContactModal(Account account) {
-        driver.findElement(INPUT_ACCOUNT_NAME).sendKeys(account.getAccountName());
-
+        waitForPageLoaded();
+        new SFInput(driver, "Account Name").fillInput(account.getAccountName());
         new SFLookUp(driver, "Parent Account").select(account.getParentAccount());
         new SFDropDown(driver, "Type").select(account.getType());
         new SFDropDown(driver, "Industry").select(account.getIndustry());
-
         new SFInput(driver, "Website").fillInput(account.getWebsite());
         new TextArea(driver, "Description").fillInput(account.getDescription());
         new SFInput(driver, "Phone").fillInput(account.getPhone());
         new SFInput(driver, "Employees").fillInput(Integer.toString(account.getEmployees()));
-
         new TextArea(driver, "Billing Street").fillInput(account.getBillingStreet());
         new SFInput(driver, "Billing City").fillInput(account.getBillingCity());
         new SFInput(driver, "Billing State/Province").fillInput(account.getBillingState());
@@ -40,7 +36,7 @@ public class NewAccountModal extends BasePage {
     }
 
     public void saveAccount() {
-        driver.findElement(BUTTON_SAVE).click();
+        new Button(driver,"Save").click();
         wait.until(ExpectedConditions.presenceOfElementLocated(BANNER_ACCOUNT));
     }
 }

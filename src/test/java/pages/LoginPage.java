@@ -16,10 +16,9 @@ public class LoginPage extends BasePage {
         driver.get(url);
     }
 
-    public HomePage login(String userName, String passwordKeys) {
+    public void login(String userName, String passwordKeys) {
         driver.findElement(USERNAME_CSS).sendKeys(userName);
         driver.findElement(INPUT_PASSWORD).sendKeys(passwordKeys);
         driver.findElement(INPUT_LOGIN).click();
-        return new HomePage(driver);
     }
 }

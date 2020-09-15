@@ -57,6 +57,6 @@ public class ContactTest extends BaseTest {
         contactSteps.validationOfContact(contact);
         contactSteps.updateContact(contact, contact_updated);
         contactSteps.validationOfContact(contact_updated);
-        contactSteps.removeAccount(contact_updated);
+        contactSteps.removeContact(contact_updated);
     }
 }

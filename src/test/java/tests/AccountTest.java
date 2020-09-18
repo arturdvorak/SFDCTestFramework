@@ -6,6 +6,8 @@ import org.testng.annotations.Test;
 
 import java.util.Locale;
 
+import static io.restassured.RestAssured.given;
+
 public class AccountTest extends BaseTest {
     Faker usFaker = new Faker(new Locale("en-US"));
     Account account = Account.builder()
@@ -50,7 +52,6 @@ public class AccountTest extends BaseTest {
             .mailingCountry(usFaker.address().country())
             .build();
 
-
     @Test
     public void createAndRemoveAccount() {
         loginSteps.open(login_url);
@@ -61,5 +62,4 @@ public class AccountTest extends BaseTest {
         accountSteps.validationOfAccount(account_updated);
         accountSteps.removeAccount(account_updated);
     }
-
 }

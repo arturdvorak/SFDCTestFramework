@@ -10,7 +10,7 @@ public class AccountTestAPI extends BaseTest {
 
     @Test
     public void createAccountUsingAPI() {
-          Response response = given().auth().oauth2(getAccessToken()).header(HTTP.CONTENT_TYPE, ContentType.JSON)
+          Response response = given().auth().oauth2(apiAdapter.getAccessToken()).header(HTTP.CONTENT_TYPE, ContentType.JSON)
                 .body("{\"name\": \"Test100\", \"description\": \"Test100 description\"}")
                 .when()
                 .post("https://ap16.salesforce.com/services/data/v49.0/sobjects/account/")

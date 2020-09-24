@@ -21,9 +21,7 @@ public class ContactViewPage extends BasePage {
         waitForPageLoaded();
         new LightningDropDown(driver, "Salutation").select(contact.getSalutation());
         new LightningInput(driver, "First Name").fillInput(contact.getFirstName());
-        new LightningInput(driver, "Middle Name").fillInput(contact.getMiddleName());
         new LightningInput(driver, "Last Name").fillInput(contact.getLastName());
-        new LightningInput(driver, "Suffix").fillInput(contact.getSuffix());
         new LightningLookUp(driver, "Account Name").select(contact.getAccountName());
         new LightningLookUp(driver, "Reports To").select(contact.getReportsTo());
         new LightningInput(driver, "Title").fillInput(contact.getTitle());
@@ -46,9 +44,7 @@ public class ContactViewPage extends BasePage {
         waitForPageLoaded();
         new ForceRecord(driver, "Name").validateFieldValue(contact.getSalutation() + " "
                 + contact.getFirstName() + " "
-                + contact.getMiddleName() + " "
-                + contact.getLastName() + " "
-                + contact.getSuffix());
+                + contact.getLastName());
         new ForceRecord(driver, "Account Name").validateFieldValue(contact.getAccountName());
         new ForceRecord(driver, "Title").validateFieldValue(contact.getTitle());
         new ForceRecord(driver, "Email").validateFieldValue(contact.getEmail());

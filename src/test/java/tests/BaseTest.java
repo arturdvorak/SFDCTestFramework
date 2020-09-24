@@ -7,10 +7,9 @@ import org.testng.annotations.AfterClass;
 import steps.AccountSteps;
 import steps.ContactSteps;
 import steps.LoginSteps;
+import utils.ApiAdapter;
 import utils.PropertiesReader;
 import org.testng.annotations.BeforeClass;
-
-import static io.restassured.RestAssured.given;
 
 public abstract class BaseTest {
     PropertiesReader propertiesReader;
@@ -19,50 +18,29 @@ public abstract class BaseTest {
     String login_url;
     String username;
     String password;
-    String cliend_id;
-    String client_secret;
-
     private WebDriver driver;
+    ApiAdapter apiAdapter;
     LoginSteps loginSteps;
     ContactSteps contactSteps;
     AccountSteps accountSteps;
 
-    @BeforeClass(description = "Init browser")
+    @BeforeClass(description = "Initializing properties and browser")
     public void setUp() {
         propertiesReader = PropertiesReader.getInstance();
-
         base_url = propertiesReader.getValue("BASE_URL");
         login_url = propertiesReader.getValue("LOGIN_URL");
         username = propertiesReader.getValue("USERNAME");
         password = propertiesReader.getValue("PASSWORD");
-        cliend_id = propertiesReader.getValue("API.CLIENT.ID");
-        client_secret = propertiesReader.getValue("API.CLIENT.SECRET");
 
+        //TODO сделать поддержку нескольких браузеров. Тип браузера вычитывать из property
         driver = WebDriverSingleton.getWebDriverInstance();
+        apiAdapter = new ApiAdapter();
         loginSteps = new LoginSteps(driver);
         contactSteps = new ContactSteps(driver);
         accountSteps = new AccountSteps(driver);
     }
 
-    protected String getAccessToken(){
-        return
-                given()
-                        .param("client_id", cliend_id)
-                        .param("client_secret", client_secret)
-                        .param("grant_type", "password")
-                        .param("username", username)
-                        .param("password", password)
-                        .param("Content-type", "application/x-www-form-urlencoded")
-                    .when()
-                    .post("https://login.salesforce.com/services/oauth2/token")
-                    .then()
-                        .log().ifError()
-                        .statusCode(200)
-                        .extract().path("access_token");
-        //Response about 'invalid_grant' may be returned in case of incorrect password
-    }
-
-    @AfterClass(description = "Closing ChromeDriver")
+    @AfterClass(description = "Closing browser")
     public void closeDriver() {
         driver.close();
     }

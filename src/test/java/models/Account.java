@@ -7,13 +7,20 @@ import lombok.*;
 @Builder
 public class Account {
     private String accountName;
-    private String type;
-    private String website;
-    private String description;
     private String parentAccount;
-    private String phone;
+    private int accountNumber;
+    private String accountSite;
+    private String type;
     private String industry;
+    private int annualRevenue;
+    private String rating;
+    private String phone;
+    private String fax;
+    private String website;
+    private String tickerSymbol;
+    private String ownership;
     private int employees;
+    private int sicCode;
     private String billingStreet;
     private String billingCity;
     private String billingState;
@@ -24,4 +31,10 @@ public class Account {
     private String mailingState;
     private String mailingZip;
     private String mailingCountry;
+    private String customerPriority;
+    private int numberOfLocations;
+    private String sla;
+    private String upsellOpportunity;
+    private String active;
+    private String description;
 }

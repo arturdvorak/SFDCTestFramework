@@ -27,9 +27,7 @@ public class ContactListPage extends BasePage {
 
     public String getContactLink(Contact contact) {
         return driver.findElement(By.xpath(String.format("//*[text()='%s']",
-                contact.getFirstName() + " "
-                        + contact.getLastName())))
-                .getAttribute("href");
+                contact.getFirstName() + " " + contact.getLastName()))).getAttribute("href");
     }
 
     public void openContact(Contact contact) {

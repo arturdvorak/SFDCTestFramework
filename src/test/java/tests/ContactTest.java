@@ -13,9 +13,9 @@ public class ContactTest extends BaseTest {
         loginSteps.open(login_url);
         loginSteps.login(username, password);
         contactSteps.createNewContact(contact);
-        //contactSteps.validationOfContact(contact);
-        //contactSteps.updateContact(contact, contact_updated);
-        //contactSteps.validationOfContact(contact_updated);
-        //contactSteps.removeContact(contact_updated);
+        contactSteps.validationOfContact(contact);
+        contactSteps.updateContact(contact, contact_updated);
+        contactSteps.validationOfContact(contact_updated);
+        contactSteps.removeContact(contact_updated);
     }
 }

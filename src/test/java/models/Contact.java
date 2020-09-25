@@ -2,8 +2,9 @@ package models;
 
 import lombok.*;
 
-@Getter
-@Setter
+import java.util.Date;
+
+@Data
 @Builder
 public class Contact {
     private String salutation;

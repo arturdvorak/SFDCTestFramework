@@ -1,11 +1,15 @@
 package models;
 
 import com.github.javafaker.Faker;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Locale;
 import java.util.concurrent.TimeUnit;
 
 public class ContactFactory {
     static Faker usFaker = new Faker(new Locale("en-US"));
+    static SimpleDateFormat formater = new SimpleDateFormat("MM-dd-yyyy");
 
     public static Contact getContact(String accountName, String department, String reportsTo) {
         return Contact.builder()
@@ -15,7 +19,7 @@ public class ContactFactory {
                 .accountName(accountName)
                 .title(usFaker.company().profession())
                 .department(department)
-                .birthdate("10/10/1988") //need to updated
+                .birthdate(formater.format(usFaker.date().past(30000, TimeUnit.DAYS)))
                 .reportsTo(reportsTo)
                 .leadSorurce(usFaker.options().option("Web", "Other"))
                 .phone(usFaker.phoneNumber().cellPhone())

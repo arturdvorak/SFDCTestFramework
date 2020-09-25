@@ -16,21 +16,24 @@ public class AccountListPage extends BasePage {
         super(driver);
     }
 
-    public void openPage() {
+    public AccountListPage openPage() {
         driver.get(URL_ACCOUNT_TAB);
+        return this;
     }
 
-    public void openNewAccountModal() {
+    public NewAccountModal openNewAccountModal() {
         new Button(driver, "New").click();
         wait.until(ExpectedConditions.visibilityOf(driver.findElement(TITLE_NEW_ACCOUNT_IN_MODAL)));
+        return new NewAccountModal(driver);
     }
 
     public String getAccountLink(Account account) {
         return driver.findElement(By.xpath(String.format("//*[text()='%s']", account.getAccountName()))).getAttribute("href");
     }
 
-    public void openAccount(Account account) {
+    public AccountViewPage openAccount(Account account) {
         driver.get(getAccountLink(account));
         wait.until(ExpectedConditions.visibilityOfElementLocated(TITLE_ACCOUNT_IN_PANEL));
+        return new AccountViewPage(driver);
     }
 }

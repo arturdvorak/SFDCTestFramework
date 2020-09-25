@@ -13,7 +13,7 @@ public class NewContactModal extends BasePage {
         super(driver);
     }
 
-    public void fillOutNewContactModal(Contact contact) {
+    public NewContactModal fillOutNewContactModal(Contact contact) {
         waitForPageLoaded();
         new SFDropDown(driver, "Salutation").select(contact.getSalutation());
         new SFInput(driver, "First Name").fillInput(contact.getFirstName());
@@ -32,7 +32,6 @@ public class NewContactModal extends BasePage {
         new SFInput(driver, "Email").fillInput(contact.getEmail());
         new SFInput(driver, "Assistant").fillInput(contact.getAssistant());
         new SFInput(driver, "Asst. Phone").fillInput(contact.getAssistantPhone());
-
         new TextArea(driver, "Mailing Street").fillInput(contact.getMailingStreet());
         new SFInput(driver, "Mailing City").fillInput(contact.getMailingCity());
         new SFInput(driver, "Mailing State/Province").fillInput(contact.getMailingState());
@@ -43,14 +42,15 @@ public class NewContactModal extends BasePage {
         new SFInput(driver, "Other State/Province").fillInput(contact.getOtherState());
         new SFInput(driver, "Other Zip/Postal Code").fillInput(contact.getOtherZip());
         new SFInput(driver, "Other Country").fillInput(contact.getOtherCountry());
-
         new SFInput(driver, "Languages").fillInput(contact.getLang());
         new SFDropDown(driver, "Level").select(contact.getLevel());
         new TextArea(driver, "Description").fillInput(contact.getDescription());
+        return this;
     }
 
-    public void saveContact() {
+    public ContactListPage saveContact() {
         new Button(driver,"Save").click();
         wait.until(ExpectedConditions.presenceOfElementLocated(BANNER_CONTACT));
+        return new ContactListPage(driver);
     }
 }

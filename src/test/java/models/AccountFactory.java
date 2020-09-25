@@ -3,6 +3,7 @@ package models;
 import com.github.javafaker.Faker;
 import java.util.Locale;
 
+//Factory pattern
 public class AccountFactory{
     static Faker usFaker = new Faker(new Locale("en-US"));
 

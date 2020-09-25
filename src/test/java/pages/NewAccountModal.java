@@ -13,7 +13,7 @@ public class NewAccountModal extends BasePage {
         super(driver);
     }
 
-    public void fillOutNewContactModal(Account account) {
+    public NewAccountModal fillOutNewContactModal(Account account) {
         waitForPageLoaded();
         new SFInput(driver, "Account Name").fillInput(account.getAccountName());
         new SFLookUp(driver, "Parent Account").select(account.getParentAccount());
@@ -30,7 +30,6 @@ public class NewAccountModal extends BasePage {
         new SFDropDown(driver, "Ownership").select(account.getOwnership());
         new SFInput(driver, "Employees").fillInput(Integer.toString(account.getEmployees()));
         new SFInput(driver, "SIC Code").fillInput(Integer.toString(account.getSicCode()));
-
         new TextArea(driver, "Billing Street").fillInput(account.getBillingStreet());
         new SFInput(driver, "Billing City").fillInput(account.getBillingCity());
         new SFInput(driver, "Billing State/Province").fillInput(account.getBillingState());
@@ -41,18 +40,18 @@ public class NewAccountModal extends BasePage {
         new SFInput(driver, "Shipping State/Province").fillInput(account.getMailingState());
         new SFInput(driver, "Shipping Zip/Postal Code").fillInput(account.getMailingZip());
         new SFInput(driver, "Shipping Country").fillInput(account.getMailingCountry());
-
         new SFDropDown(driver, "Customer Priority").select(account.getCustomerPriority());
         new SFInput(driver, "Number of Locations").fillInput(Integer.toString(account.getNumberOfLocations()));
         new SFDropDown(driver, "Active").select(account.getActive());
         new SFDropDown(driver, "SLA").select(account.getSla());
         new SFDropDown(driver, "Upsell Opportunity").select(account.getUpsellOpportunity());
-
         new TextArea(driver, "Description").fillInput(account.getDescription());
+        return this;
     }
 
-    public void saveAccount() {
+    public AccountListPage saveAccount() {
         new Button(driver,"Save").click();
         wait.until(ExpectedConditions.presenceOfElementLocated(BANNER_ACCOUNT));
+        return new AccountListPage(driver);
     }
 }

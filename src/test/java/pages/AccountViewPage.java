@@ -10,14 +10,13 @@ public class AccountViewPage extends BasePage {
     private static final By TAB_DETAILS = By.xpath(ACTIVE_TAB_LOCATOR + "//a[@data-label='Details']");
     private static final By FIELD_ACCOUNT_NAME_EDIT = By.xpath("//div/span[text()='Account Name']/ancestor::force-record-layout-item//button");
     private static final By TITLE_ACCOUNTS = By.xpath("//li/span[text()='Accounts']");
-    private static final By BUTTON_EXPAND_DROPDOWN = By.xpath("//a[@title='Show 8 more actions']");
 
 
     public AccountViewPage(WebDriver driver) {
         super(driver);
     }
 
-    public void updateOpenAccount(Account account) {
+    public AccountListPage updateOpenAccount(Account account) {
         driver.findElement(TAB_DETAILS).click();
         driver.findElement(FIELD_ACCOUNT_NAME_EDIT).click();
         waitForPageLoaded();
@@ -36,7 +35,6 @@ public class AccountViewPage extends BasePage {
         new LightningDropDown(driver, "Ownership").select(account.getOwnership());
         new LightningInput(driver, "Employees").fillInput(Integer.toString(account.getEmployees()));
         new LightningInput(driver, "SIC Code").fillInput(Integer.toString(account.getSicCode()));
-
         new TextArea(driver, "Billing Street").fillInput(account.getBillingStreet());
         new LightningInput(driver, "Billing City").fillInput(account.getBillingCity());
         new LightningInput(driver, "Billing State/Province").fillInput(account.getBillingState());
@@ -47,19 +45,18 @@ public class AccountViewPage extends BasePage {
         new LightningInput(driver, "Shipping State/Province").fillInput(account.getMailingState());
         new LightningInput(driver, "Shipping Zip/Postal Code").fillInput(account.getMailingZip());
         new LightningInput(driver, "Shipping Country").fillInput(account.getMailingCountry());
-
         new LightningDropDown(driver, "Customer Priority").select(account.getCustomerPriority());
         new LightningInput(driver, "Number of Locations").fillInput(Integer.toString(account.getNumberOfLocations()));
         new LightningDropDown(driver, "Active").select(account.getActive());
         new LightningDropDown(driver, "SLA").select(account.getSla());
         new LightningDropDown(driver, "Upsell Opportunity").select(account.getUpsellOpportunity());
-
         new TextArea(driver, "Description").fillInput(account.getDescription());
         new Button(driver,"Save").click();
         wait.until(ExpectedConditions.presenceOfElementLocated(FIELD_ACCOUNT_NAME_EDIT));
+        return new AccountListPage(driver);
     }
 
-    public void validateAccountData(Account account) {
+    public AccountListPage validateAccountData(Account account) {
         driver.findElement(TAB_DETAILS).click();
         waitForPageLoaded();
         new ForceRecord(driver, "Account Name").validateFieldValue(account.getAccountName());
@@ -96,13 +93,15 @@ public class AccountViewPage extends BasePage {
         new ForceRecord(driver, "SLA").validateFieldValue(account.getSla());
         new ForceRecord(driver, "Upsell Opportunity").validateFieldValue(account.getUpsellOpportunity());
         new ForceRecord(driver, "Description").validateFieldValue(account.getDescription());
+        return new AccountListPage(driver);
     }
 
-    public void deleteOpenedAccount(){
+    public AccountListPage deleteOpenedAccount(){
         new Button(driver,"Show 8 more actions").click();
         new Button(driver,"Delete").clickUsingJavaScript();
         driver.switchTo().activeElement();
         new Button(driver,"Delete").click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(TITLE_ACCOUNTS));
+        return new AccountListPage(driver);
     }
 }

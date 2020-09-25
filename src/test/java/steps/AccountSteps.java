@@ -17,29 +17,41 @@ public class AccountSteps {
         accountViewPage = new AccountViewPage(driver);
     }
 
-    public void createNewAccount(Account account) {
-        accountListPage.openPage();
-        accountListPage.openNewAccountModal();
-        newAccountModal.fillOutNewContactModal(account);
-        newAccountModal.saveAccount();
+    public AccountSteps createNewAccount(Account account) {
+        accountListPage
+                .openPage()
+                .openNewAccountModal();
+        newAccountModal
+                .fillOutNewContactModal(account)
+                .saveAccount();
+        return this;
     }
 
-    public void validationOfAccount(Account account) {
-        accountListPage.openPage();
-        accountListPage.openAccount(account);
-        accountViewPage.validateAccountData(account);
+    public AccountSteps validationOfAccount(Account account) {
+        accountListPage
+                .openPage()
+                .openAccount(account);
+        accountViewPage
+                .validateAccountData(account);
+        return this;
     }
 
-    public void updateAccount(Account account, Account account_updated) {
-        accountListPage.openPage();
-        accountListPage.openAccount(account);
-        accountViewPage.updateOpenAccount(account_updated);
+    public AccountSteps updateAccount(Account account, Account account_updated) {
+        accountListPage
+                .openPage()
+                .openAccount(account);
+        accountViewPage
+                .updateOpenAccount(account_updated);
+        return this;
     }
 
-    public void removeAccount(Account account_updated) {
-        accountListPage.openPage();
-        accountListPage.openAccount(account_updated);
-        accountViewPage.deleteOpenedAccount();
+    public AccountSteps removeAccount(Account account_updated) {
+        accountListPage
+                .openPage()
+                .openAccount(account_updated);
+        accountViewPage
+                .deleteOpenedAccount();
+        return this;
     }
 
 }

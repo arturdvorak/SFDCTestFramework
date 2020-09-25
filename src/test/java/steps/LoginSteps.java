@@ -10,8 +10,9 @@ public class LoginSteps {
         loginPage = new LoginPage(driver);
     }
 
-    public void open(String url) {
+    public LoginSteps open(String url) {
         loginPage.openPage(url);
+        return this;
     }
 
     public void login(String username, String password) {

@@ -4,18 +4,23 @@ import models.Account;
 import models.AccountFactory;
 import org.testng.annotations.Test;
 
+
 public class AccountTest extends BaseTest {
-    Account account = AccountFactory.getAccount("Test1");
-    Account account_updated = AccountFactory.getAccount("Test2");
+    AccountFactory accountFactory = new AccountFactory();
 
     @Test
     public void createAndRemoveAccount() {
-        loginSteps.open(login_url);
-        loginSteps.login(username, password);
-        accountSteps.createNewAccount(account);
-        accountSteps.validationOfAccount(account);
-        accountSteps.updateAccount(account, account_updated);
-        accountSteps.validationOfAccount(account_updated);
-        accountSteps.removeAccount(account_updated);
+        loginSteps
+                .open(login_url)
+                .login(username, password);
+
+        Account account = accountFactory.getAccount("Test1");
+        Account accountUpdated = accountFactory.getAccount("Test2");
+        accountSteps
+                .createNewAccount(account)
+                .validationOfAccount(account)
+                .updateAccount(account, accountUpdated)
+                .validationOfAccount(accountUpdated)
+                .removeAccount(accountUpdated);
     }
 }

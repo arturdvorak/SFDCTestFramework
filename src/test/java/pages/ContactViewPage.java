@@ -15,11 +15,10 @@ public class ContactViewPage extends BasePage {
         super(driver);
     }
 
-    public void updateOpenContact(Contact contact) {
+    public ContactListPage updateOpenContact(Contact contact) {
         driver.findElement(TAB_DETAILS).click();
         driver.findElement(FIELD_NAME_EDIT).click();
         waitForPageLoaded();
-
         new LightningDropDown(driver, "Salutation").select(contact.getSalutation());
         new LightningInput(driver, "First Name").fillInput(contact.getFirstName());
         new LightningInput(driver, "Last Name").fillInput(contact.getLastName());
@@ -37,7 +36,6 @@ public class ContactViewPage extends BasePage {
         new LightningInput(driver, "Email").fillInput(contact.getEmail());
         new LightningInput(driver, "Assistant").fillInput(contact.getAssistant());
         new LightningInput(driver, "Asst. Phone").fillInput(contact.getAssistantPhone());
-
         new TextArea(driver, "Mailing Street").fillInput(contact.getMailingStreet());
         new LightningInput(driver, "Mailing City").fillInput(contact.getMailingCity());
         new LightningInput(driver, "Mailing State/Province").fillInput(contact.getMailingState());
@@ -48,16 +46,15 @@ public class ContactViewPage extends BasePage {
         new LightningInput(driver, "Other State/Province").fillInput(contact.getOtherState());
         new LightningInput(driver, "Other Zip/Postal Code").fillInput(contact.getOtherZip());
         new LightningInput(driver, "Other Country").fillInput(contact.getOtherCountry());
-
         new LightningInput(driver, "Languages").fillInput(contact.getLang());
         new LightningDropDown(driver, "Level").select(contact.getLevel());
         new TextArea(driver, "Description").fillInput(contact.getDescription());
-
         new Button(driver, "Save").click();
         wait.until(ExpectedConditions.presenceOfElementLocated(FIELD_NAME_EDIT));
+        return new ContactListPage(driver);
     }
 
-    public void validateContactData(Contact contact) {
+    public ContactListPage validateContactData(Contact contact) {
         driver.findElement(TAB_DETAILS).click();
         waitForPageLoaded();
         new ForceRecord(driver, "Name").validateFieldValue(contact.getSalutation() + " "
@@ -92,13 +89,15 @@ public class ContactViewPage extends BasePage {
         new ForceRecord(driver, "Languages").validateFieldValue(contact.getLang());
         new ForceRecord(driver, "Level").validateFieldValue(contact.getLevel());
         new ForceRecord(driver, "Description").validateFieldValue(contact.getDescription());
+        return new ContactListPage(driver);
     }
 
-    public void deleteOpenedContact(){
+    public ContactViewPage deleteOpenedContact(){
         new Button(driver,"Show 5 more actions").click();
         new Button(driver,"Delete").clickUsingJavaScript();
         driver.switchTo().activeElement();
         new Button(driver,"Delete").click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(TITLE_CONTACTS));
+        return new ContactViewPage(driver);
     }
 }

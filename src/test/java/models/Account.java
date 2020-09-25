@@ -2,8 +2,7 @@ package models;
 
 import lombok.*;
 
-@Getter
-@Setter
+@Data
 @Builder
 public class Account {
     private String accountName;

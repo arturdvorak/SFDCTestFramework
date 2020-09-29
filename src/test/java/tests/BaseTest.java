@@ -1,5 +1,6 @@
 package tests;
 
+import driver.BrowserType;
 import driver.WebDriverSingleton;
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.AfterClass;
@@ -12,7 +13,7 @@ import org.testng.annotations.BeforeClass;
 public abstract class BaseTest {
     PropertiesReader propertiesReader;
     public static String base_url;
-    public static String browser_type;
+    public static String browserType;
     String login_url;
     String username;
     String password;
@@ -28,8 +29,8 @@ public abstract class BaseTest {
         login_url = propertiesReader.getValue("LOGIN_URL");
         username = propertiesReader.getValue("USERNAME");
         password = propertiesReader.getValue("PASSWORD");
-        browser_type = propertiesReader.getValue("BROWSER_TYPE");
-        driver = WebDriverSingleton.getWebDriverInstance(browser_type);
+        browserType = propertiesReader.getValue("BROWSER_TYPE");
+        driver = WebDriverSingleton.getWebDriverInstance(BrowserType.valueOf(browserType));
         loginSteps = new LoginSteps(driver);
         contactSteps = new ContactSteps(driver);
         accountSteps = new AccountSteps(driver);

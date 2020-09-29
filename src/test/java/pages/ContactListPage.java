@@ -16,26 +16,25 @@ public class ContactListPage extends BasePage {
         super(driver);
     }
 
-    public void openPage() {
+    public ContactListPage openPage() {
         driver.get(URL_CONTACT_TAB);
+        return this;
     }
 
-    public void openNewContactModal() {
+    public NewContactModal openNewContactModal() {
         new Button(driver, "New").click();
         wait.until(ExpectedConditions.visibilityOf(driver.findElement(TITLE_NEW_CONTACT_IN_MODAL)));
+        return new NewContactModal(driver);
     }
 
     public String getContactLink(Contact contact) {
         return driver.findElement(By.xpath(String.format("//*[text()='%s']",
-                contact.getFirstName() + " "
-                        + contact.getMiddleName() + " "
-                        + contact.getLastName() + " "
-                        + contact.getSuffix())))
-                .getAttribute("href");
+                contact.getFirstName() + " " + contact.getLastName()))).getAttribute("href");
     }
 
-    public void openContact(Contact contact) {
+    public ContactViewPage openContact(Contact contact) {
         driver.get(getContactLink(contact));
         wait.until(ExpectedConditions.visibilityOfElementLocated(TITLE_CONTACT_IN_PANEL));
+        return new ContactViewPage(driver);
     }
 }

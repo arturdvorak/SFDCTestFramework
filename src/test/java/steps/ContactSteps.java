@@ -17,28 +17,40 @@ public class ContactSteps {
         contactViewPage = new ContactViewPage(driver);
     }
 
-    public void createNewContact(Contact contact) {
-        contactListPage.openPage();
-        contactListPage.openNewContactModal();
-        newContactModal.fillOutNewContactModal(contact);
-        newContactModal.saveContact();
+    public ContactSteps createNewContact(Contact contact) {
+        contactListPage
+                .openPage()
+                .openNewContactModal();
+        newContactModal
+                .fillOutNewContactModal(contact)
+                .saveContact();
+        return this;
     }
 
-    public void validationOfContact(Contact contact) {
-        contactListPage.openPage();
-        contactListPage.openContact(contact);
-        contactViewPage.validateContactData(contact);
+    public ContactSteps validationOfContact(Contact contact) {
+        contactListPage
+                .openPage()
+                .openContact(contact);
+        contactViewPage
+                .validateContactData(contact);
+        return this;
     }
 
-    public void updateContact(Contact contact, Contact contact_updated) {
-        contactListPage.openPage();
-        contactListPage.openContact(contact);
-        contactViewPage.updateOpenContact(contact_updated);
+    public ContactSteps updateContact(Contact contact, Contact contact_updated) {
+        contactListPage
+                .openPage()
+                .openContact(contact);
+        contactViewPage
+                .updateOpenContact(contact_updated);
+        return this;
     }
 
-    public void removeContact(Contact contact) {
-        contactListPage.openPage();
-        contactListPage.openContact(contact);
-        contactViewPage.deleteOpenedContact();
+    public ContactSteps removeContact(Contact contact) {
+        contactListPage
+                .openPage()
+                .openContact(contact);
+        contactViewPage
+                .deleteOpenedContact();
+        return this;
     }
 }

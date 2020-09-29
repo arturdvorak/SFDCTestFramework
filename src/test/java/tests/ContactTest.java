@@ -1,62 +1,26 @@
 package tests;
 
-import com.github.javafaker.Faker;
 import models.Contact;
+import models.ContactFactory;
 import org.testng.annotations.Test;
-import java.util.Locale;
 
 public class ContactTest extends BaseTest {
-    Faker usFaker = new Faker(new Locale("en-US"));
-    Contact contact = Contact.builder()
-            .salutation("Mr.")
-            .firstName(usFaker.name().firstName())
-            .middleName("Test")
-            .lastName(usFaker.name().lastName())
-            .suffix(usFaker.name().suffix())
-            .accountName("Test1")
-            .title(usFaker.company().profession())
-            .email(usFaker.internet().emailAddress())
-            .phone(usFaker.phoneNumber().cellPhone())
-            .mobile(usFaker.phoneNumber().cellPhone())
-            .reportsTo("HeadContact1")
-            .department("Test Department")
-            .fax(usFaker.phoneNumber().cellPhone())
-            .mailingStreet(usFaker.address().streetName())
-            .mailingCity(usFaker.address().city())
-            .mailingState(usFaker.address().state())
-            .mailingZip(usFaker.address().zipCode())
-            .mailingCountry(usFaker.address().country())
-            .build();
-
-    Contact contact_updated = Contact.builder()
-            .salutation("Ms.")
-            .firstName(usFaker.name().firstName())
-            .middleName("Test")
-            .lastName(usFaker.name().lastName())
-            .suffix(usFaker.name().suffix())
-            .accountName("Test2")
-            .title(usFaker.company().profession())
-            .email(usFaker.internet().emailAddress())
-            .phone(usFaker.phoneNumber().cellPhone())
-            .mobile(usFaker.phoneNumber().cellPhone())
-            .reportsTo("HeadContact2")
-            .department("Test Department")
-            .fax(usFaker.phoneNumber().cellPhone())
-            .mailingStreet(usFaker.address().streetName())
-            .mailingCity(usFaker.address().city())
-            .mailingState(usFaker.address().state())
-            .mailingZip(usFaker.address().zipCode())
-            .mailingCountry(usFaker.address().country())
-            .build();
+    ContactFactory contactFactory = new ContactFactory();
 
     @Test
     public void createAndRemoveContact() {
-        loginSteps.open(login_url);
-        loginSteps.login(username, password);
-        contactSteps.createNewContact(contact);
-        contactSteps.validationOfContact(contact);
-        contactSteps.updateContact(contact, contact_updated);
-        contactSteps.validationOfContact(contact_updated);
-        contactSteps.removeContact(contact_updated);
+        loginSteps
+                .open(login_url)
+                .login(username, password);
+
+        Contact contact = contactFactory.getContact("Test1", "Test1 Department", "HeadContact1");
+        Contact contactUpdated = contactFactory.getContact("Test2", "Test2 Department", "HeadContact2");
+
+        contactSteps
+                .createNewContact(contact)
+                .validationOfContact(contact)
+                .updateContact(contact, contactUpdated)
+                .validationOfContact(contactUpdated)
+                .removeContact(contactUpdated);
     }
 }

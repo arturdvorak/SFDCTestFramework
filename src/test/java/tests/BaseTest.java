@@ -12,6 +12,7 @@ import org.testng.annotations.BeforeClass;
 public abstract class BaseTest {
     PropertiesReader propertiesReader;
     public static String base_url;
+    public static String browser_type;
     String login_url;
     String username;
     String password;
@@ -27,7 +28,8 @@ public abstract class BaseTest {
         login_url = propertiesReader.getValue("LOGIN_URL");
         username = propertiesReader.getValue("USERNAME");
         password = propertiesReader.getValue("PASSWORD");
-        driver = WebDriverSingleton.getWebDriverInstance();
+        browser_type = propertiesReader.getValue("BROWSER_TYPE");
+        driver = WebDriverSingleton.getWebDriverInstance(browser_type);
         loginSteps = new LoginSteps(driver);
         contactSteps = new ContactSteps(driver);
         accountSteps = new AccountSteps(driver);

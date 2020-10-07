@@ -1,9 +1,8 @@
 package elements;
 
+import driver.JSUtils;
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import java.util.concurrent.TimeUnit;
@@ -19,7 +18,7 @@ public class Button extends BaseElement {
 
     public void click() {
         driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
-        if (driver.findElements(By.xpath(String.format(MODAL_LOCATOR))).size() > 0) {
+        if (driver.findElements(By.xpath(MODAL_LOCATOR)).size() > 0) {
             System.out.println(String.format("Click '%s' button in modal.", title));
             wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(String.format(BUTTON_LOCATOR_IN_MODAL_LOCATOR, title))));
             driver.findElement(By.xpath(String.format(BUTTON_LOCATOR_IN_MODAL_LOCATOR, title))).click();
@@ -33,8 +32,6 @@ public class Button extends BaseElement {
 
     public void clickUsingJavaScript() {
         System.out.println(String.format("Click '%s' button.", title));
-        WebElement deleteButtonInDropDown = driver.findElement(By.xpath(String.format(BUTTON_LOCATOR, title, title, title)));
-        JavascriptExecutor executor = (JavascriptExecutor)driver;
-        executor.executeScript("arguments[0].click();", deleteButtonInDropDown);
+        JSUtils.clickUsingJavaScript(driver, driver.findElement(By.xpath(String.format(BUTTON_LOCATOR, title, title, title))));
     }
 }

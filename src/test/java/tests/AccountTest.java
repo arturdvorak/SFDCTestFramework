@@ -11,7 +11,7 @@ public class AccountTest extends BaseTest {
     @Test
     public void createAndRemoveAccount() {
         loginSteps
-                .open(login_url)
+                .open()
                 .login(username, password);
 
         Account account = accountFactory.getAccount("Test1");

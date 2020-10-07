@@ -2,8 +2,6 @@ package models;
 
 import lombok.*;
 
-import java.util.Date;
-
 @Data
 @Builder
 public class Contact {
@@ -13,9 +11,9 @@ public class Contact {
     private String accountName;
     private String title;
     private String department;
-    private String birthdate;
+    private String birthDate;
     private String reportsTo;
-    private String leadSorurce;
+    private String leadSource;
     private String phone;
     private String homePhone;
     private String mobile;

@@ -15,10 +15,6 @@ public abstract class BasePage {
         wait = new WebDriverWait(driver, 10);
     }
 
-    protected WebDriver getDriver() {
-        return driver;
-    }
-
     public void waitForPageLoaded() {
         new ExpectedCondition<Boolean>() {
             public Boolean apply(WebDriver driver) {

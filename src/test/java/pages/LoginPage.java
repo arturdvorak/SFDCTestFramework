@@ -2,6 +2,7 @@ package pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import tests.BaseTest;
 
 public class LoginPage extends BasePage {
     private static final By USERNAME_CSS = By.id("username");
@@ -12,8 +13,8 @@ public class LoginPage extends BasePage {
         super(driver);
     }
 
-    public void openPage (String url) {
-        driver.get(url);
+    public void openPage () {
+        driver.get(BaseTest.loginUrl);
     }
 
     public void login(String userName, String passwordKeys) {

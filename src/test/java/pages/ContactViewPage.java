@@ -25,9 +25,9 @@ public class ContactViewPage extends BasePage {
         new LightningLookUp(driver, "Account Name").select(contact.getAccountName());
         new LightningInput(driver, "Title").fillInput(contact.getTitle());
         new LightningInput(driver, "Department").fillInput(contact.getDepartment());
-        new LightningInput(driver, "Birthdate").fillInput(contact.getBirthdate());
+        new LightningInput(driver, "Birthdate").fillInput(contact.getBirthDate());
         new LightningLookUp(driver, "Reports To").select(contact.getReportsTo());
-        new LightningDropDown(driver, "Lead Source").select(contact.getLeadSorurce());
+        new LightningDropDown(driver, "Lead Source").select(contact.getLeadSource());
         new LightningInput(driver, "Phone").fillInput(contact.getPhone());
         new LightningInput(driver, "Home Phone").fillInput(contact.getHomePhone());
         new LightningInput(driver, "Mobile").fillInput(contact.getMobile());
@@ -63,9 +63,9 @@ public class ContactViewPage extends BasePage {
         new ForceRecord(driver, "Account Name").validateFieldValue(contact.getAccountName());
         new ForceRecord(driver, "Title").validateFieldValue(contact.getTitle());
         new ForceRecord(driver, "Department").validateFieldValue(contact.getDepartment());
-        new ForceRecord(driver, "Birthdate").validateFieldValue(contact.getBirthdate());
+        new ForceRecord(driver, "Birthdate").validateFieldValue(contact.getBirthDate());
         new ForceRecord(driver, "Reports To").validateFieldValue(contact.getReportsTo());
-        new ForceRecord(driver, "Lead Source").validateFieldValue(contact.getLeadSorurce());
+        new ForceRecord(driver, "Lead Source").validateFieldValue(contact.getLeadSource());
         new ForceRecord(driver, "Phone").validateFieldValue(contact.getPhone());
         new ForceRecord(driver, "Home Phone").validateFieldValue(contact.getHomePhone());
         new ForceRecord(driver, "Mobile").validateFieldValue(contact.getMobile());

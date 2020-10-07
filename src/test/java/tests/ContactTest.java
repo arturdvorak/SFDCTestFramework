@@ -10,7 +10,7 @@ public class ContactTest extends BaseTest {
     @Test
     public void createAndRemoveContact() {
         loginSteps
-                .open(login_url)
+                .open()
                 .login(username, password);
 
         Contact contact = contactFactory.getContact("Test1", "Test1 Department", "HeadContact1");

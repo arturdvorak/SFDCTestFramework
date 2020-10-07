@@ -8,7 +8,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import tests.BaseTest;
 
 public class AccountListPage extends BasePage {
-    private static final String URL_ACCOUNT_TAB = BaseTest.base_url + "o/Account/list";
+    private static final String URL_ACCOUNT_TAB = BaseTest.baseUrl + "o/Account/list";
     private static final By TITLE_ACCOUNT_IN_PANEL = By.xpath("//h1/div[text()='Account']");
     private static final By TITLE_NEW_ACCOUNT_IN_MODAL = By.xpath("//h2[text()='New Account']");
 

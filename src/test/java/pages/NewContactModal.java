@@ -21,9 +21,9 @@ public class NewContactModal extends BasePage {
         new SFLookUp(driver, "Account Name").select(contact.getAccountName());
         new SFInput(driver, "Title").fillInput(contact.getTitle());
         new SFInput(driver, "Department").fillInput(contact.getDepartment());
-        new SFInput(driver, "Birthdate").fillInput(contact.getBirthdate());
+        new SFInput(driver, "Birthdate").fillInput(contact.getBirthDate());
         new SFLookUp(driver, "Reports To").select(contact.getReportsTo());
-        new SFDropDown(driver, "Lead Source").select(contact.getLeadSorurce());
+        new SFDropDown(driver, "Lead Source").select(contact.getLeadSource());
         new SFInput(driver, "Phone").fillInput(contact.getPhone());
         new SFInput(driver, "Home Phone").fillInput(contact.getHomePhone());
         new SFInput(driver, "Mobile").fillInput(contact.getMobile());

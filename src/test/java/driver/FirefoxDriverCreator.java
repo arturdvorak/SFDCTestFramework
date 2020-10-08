@@ -4,7 +4,6 @@ import org.openqa.selenium.Platform;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.UnexpectedAlertBehaviour;
 import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.firefox.FirefoxProfile;
 import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
@@ -18,7 +17,6 @@ public class FirefoxDriverCreator extends WebDriverCreator {
         System.setProperty(FIREFOX_PROPERTY, driverPath+FIREFOX_DRIVER);
         DesiredCapabilities capabilities = getCapabilities();
         capabilities.setPlatform(Platform.ANY);
-        //capabilities.setCapability("marionatte", false);
         capabilities.setCapability(FirefoxDriver.PROFILE, getFirefoxProfile());
         return new FirefoxDriver();
     }

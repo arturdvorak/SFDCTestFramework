@@ -7,15 +7,13 @@ import org.testng.annotations.Test;
 public class ContactTest extends BaseTest {
     ContactFactory contactFactory = new ContactFactory();
 
-    @Test
+    @Test(enabled=false)
     public void createAndRemoveContact() {
         loginSteps
-                .open(login_url)
+                .open()
                 .login(username, password);
-
         Contact contact = contactFactory.getContact("Test1", "Test1 Department", "HeadContact1");
         Contact contactUpdated = contactFactory.getContact("Test2", "Test2 Department", "HeadContact2");
-
         contactSteps
                 .createNewContact(contact)
                 .validationOfContact(contact)

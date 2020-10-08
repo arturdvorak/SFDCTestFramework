@@ -23,7 +23,7 @@ public class AccountApiTest {
           Response response = given().auth().oauth2(apiAdapter.getAccessToken()).header(HTTP.CONTENT_TYPE, ContentType.JSON)
                 .body(gson.toJson(new AccountFactory().getAccount("0012w00000M1yrYAAR"))).log().all()
                 .when()
-                .post("https://ap16.salesforce.com/services/data/v49.0/sobjects/account/")
+                .post(ApiAdapter.baseUrlClassic + ApiAdapter.apiPostUrlCreateAccount)
                 .then().log().all()
                 .statusCode(201)
                 .extract().response();

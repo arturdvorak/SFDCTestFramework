@@ -4,10 +4,10 @@ import com.github.javafaker.Faker;
 import java.util.Locale;
 
 //Factory pattern
-public class AccountFactory{
+public class AccountFactory {
     static Faker usFaker = new Faker(new Locale("en-US"));
 
-    public static Account getAccount(String parentAccountName) {
+    public Account getAccount(String parentAccountName) {
         return Account.builder()
                 .accountName(usFaker.company().name())
                 .parentAccount(parentAccountName)

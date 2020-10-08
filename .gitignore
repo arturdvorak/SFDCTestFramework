@@ -1,6 +1,5 @@
 .idea/*
 target/
-src/test/resources/
 *.properties
 *.iml
 *.iws

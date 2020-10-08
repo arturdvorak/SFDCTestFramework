@@ -10,7 +10,6 @@ public class InternetExplorerDriverCreator extends WebDriverCreator {
 
     public WebDriver factoryMethod() {
         System.setProperty(IE_PROPERTY, driverPath+IE_DRIVER);
-        WebDriver driver = new InternetExplorerDriver();
-        return driver;
+        return new InternetExplorerDriver();
     }
 }

@@ -7,12 +7,11 @@ import org.testng.annotations.AfterClass;
 import steps.AccountSteps;
 import steps.ContactSteps;
 import steps.LoginSteps;
-import utils.PropertiesReader;
 import org.testng.annotations.BeforeClass;
+import utils.PropertyReader;
+import java.io.IOException;
 
 public abstract class BaseTest {
-    PropertiesReader propertiesReader;
-    public static String baseUrl;
     public static String browserType;
     public static String loginUrl;
     String username;
@@ -24,12 +23,14 @@ public abstract class BaseTest {
 
     @BeforeClass(description = "Initializing properties and browser")
     public void setUp() {
-        propertiesReader = PropertiesReader.getInstance();
-        baseUrl = propertiesReader.getValue("base.url.light");
-        loginUrl = propertiesReader.getValue("login.url");
-        username = propertiesReader.getValue("username");
-        password = propertiesReader.getValue("password");
-        browserType = propertiesReader.getValue("browser.type");
+        try {
+            loginUrl = PropertyReader.getProperty("login.url");
+            username = PropertyReader.getProperty("username");
+            password = PropertyReader.getProperty("password");
+            browserType = PropertyReader.getProperty("browser.type");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         driver = WebDriverSingleton.getWebDriverInstance(BrowserType.valueOf(browserType));
         loginSteps = new LoginSteps(driver);
         contactSteps = new ContactSteps(driver);

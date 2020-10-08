@@ -96,7 +96,7 @@ public class AccountViewPage extends BasePage {
         return new AccountListPage(driver);
     }
 
-    public AccountListPage deleteOpenedAccount(){
+    public AccountListPage deleteOpenedAccount() {
         new Button(driver,"Show 8 more actions").click();
         new Button(driver,"Delete").clickUsingJavaScript();
         driver.switchTo().activeElement();

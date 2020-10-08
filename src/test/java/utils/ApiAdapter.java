@@ -1,6 +1,7 @@
 package utils;
 
 import org.apache.http.protocol.HTTP;
+import java.io.IOException;
 import static io.restassured.RestAssured.given;
 
 public class ApiAdapter {
@@ -11,18 +12,21 @@ public class ApiAdapter {
     private static String apiPostUrlToken;
     public static String loginUrl;
     public static String baseUrlClassic;
-    public static String apiPostUtlCreatAccount;
+    public static String apiPostUrlCreateAccount;
 
     public ApiAdapter() {
-        PropertiesReader propertiesReader = PropertiesReader.getInstance();
-        username = propertiesReader.getValue("username");
-        password = propertiesReader.getValue("password");
-        loginUrl = propertiesReader.getValue("login.url");
-        clientId = propertiesReader.getValue("api.client.id");
-        clientSecret = propertiesReader.getValue("api.client.secret");
-        baseUrlClassic = propertiesReader.getValue("base.url.classic");
-        apiPostUrlToken = propertiesReader.getValue("api.post.url.token");
-        apiPostUtlCreatAccount = propertiesReader.getValue("api.post.url.create.account");
+        try {
+            username = PropertyReader.getProperty("username");
+            password = PropertyReader.getProperty("password");
+            loginUrl = PropertyReader.getProperty("login.url");
+            clientId = PropertyReader.getProperty("api.client.id");
+            clientSecret = PropertyReader.getProperty("api.client.secret");
+            baseUrlClassic = PropertyReader.getProperty("base.url.classic");
+            apiPostUrlToken = PropertyReader.getProperty("api.post.url.token");
+            apiPostUrlCreateAccount = PropertyReader.getProperty("api.post.url.create.account");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public String getAccessToken(){

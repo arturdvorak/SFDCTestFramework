@@ -6,6 +6,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
+import java.io.IOException;
+
 public class NewAccountModal extends BasePage {
     private static final By BANNER_ACCOUNT = By.cssSelector("img[title='Account']");
 

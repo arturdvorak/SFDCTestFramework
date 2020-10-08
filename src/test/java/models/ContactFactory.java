@@ -1,7 +1,6 @@
 package models;
 
 import com.github.javafaker.Faker;
-
 import java.text.SimpleDateFormat;
 import java.util.Locale;
 import java.util.concurrent.TimeUnit;

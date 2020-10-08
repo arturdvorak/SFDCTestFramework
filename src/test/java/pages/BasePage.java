@@ -1,5 +1,6 @@
 package pages;
 
+import io.qameta.allure.Attachment;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedCondition;
@@ -21,6 +22,11 @@ public abstract class BasePage {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    @Attachment(value = "Page screenshot", type = "image/png")
+    public byte[] saveScreenshot(byte[] screenShot) {
+        return screenShot;
     }
 
     public void waitForPageLoaded() {

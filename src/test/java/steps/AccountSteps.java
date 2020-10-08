@@ -1,5 +1,6 @@
 package steps;
 
+import io.qameta.allure.Step;
 import models.Account;
 import org.openqa.selenium.WebDriver;
 import pages.AccountListPage;
@@ -17,6 +18,7 @@ public class AccountSteps {
         accountViewPage = new AccountViewPage(driver);
     }
 
+    @Step
     public AccountSteps createNewAccount(Account account) {
         accountListPage
                 .openPage()
@@ -27,6 +29,7 @@ public class AccountSteps {
         return this;
     }
 
+    @Step
     public AccountSteps validationOfAccount(Account account) {
         accountListPage
                 .openPage()
@@ -36,6 +39,7 @@ public class AccountSteps {
         return this;
     }
 
+    @Step
     public AccountSteps updateAccount(Account account, Account account_updated) {
         accountListPage
                 .openPage()
@@ -45,6 +49,7 @@ public class AccountSteps {
         return this;
     }
 
+    @Step
     public AccountSteps removeAccount(Account account_updated) {
         accountListPage
                 .openPage()
@@ -53,5 +58,4 @@ public class AccountSteps {
                 .deleteOpenedAccount();
         return this;
     }
-
 }

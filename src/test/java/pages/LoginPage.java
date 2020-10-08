@@ -4,8 +4,6 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import tests.BaseTest;
 
-import java.io.IOException;
-
 public class LoginPage extends BasePage {
     private static final By USERNAME_CSS = By.id("username");
     private static final By INPUT_PASSWORD = By.id("password");

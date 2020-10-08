@@ -9,7 +9,6 @@ public final class PropertyReader {
     private static String propertiesPath ="/config.properties";
     private static volatile Properties properties;
     private static InputStream inputStream;
-    //private String propName = "/config.properties";
 
     private PropertyReader() {
     }

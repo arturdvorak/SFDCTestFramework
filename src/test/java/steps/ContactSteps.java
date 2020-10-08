@@ -1,5 +1,6 @@
 package steps;
 
+import io.qameta.allure.Step;
 import models.Contact;
 import org.openqa.selenium.WebDriver;
 import pages.ContactListPage;
@@ -17,6 +18,7 @@ public class ContactSteps {
         contactViewPage = new ContactViewPage(driver);
     }
 
+    @Step
     public ContactSteps createNewContact(Contact contact) {
         contactListPage
                 .openPage()
@@ -27,6 +29,7 @@ public class ContactSteps {
         return this;
     }
 
+    @Step
     public ContactSteps validationOfContact(Contact contact) {
         contactListPage
                 .openPage()
@@ -36,6 +39,7 @@ public class ContactSteps {
         return this;
     }
 
+    @Step
     public ContactSteps updateContact(Contact contact, Contact contact_updated) {
         contactListPage
                 .openPage()
@@ -45,6 +49,7 @@ public class ContactSteps {
         return this;
     }
 
+    @Step
     public ContactSteps removeContact(Contact contact) {
         contactListPage
                 .openPage()

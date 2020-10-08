@@ -11,7 +11,6 @@ public class AccountViewPage extends BasePage {
     private static final By FIELD_ACCOUNT_NAME_EDIT = By.xpath("//div/span[text()='Account Name']/ancestor::force-record-layout-item//button");
     private static final By TITLE_ACCOUNTS = By.xpath("//li/span[text()='Accounts']");
 
-
     public AccountViewPage(WebDriver driver) {
         super(driver);
     }
@@ -73,7 +72,6 @@ public class AccountViewPage extends BasePage {
         new ForceRecord(driver, "Ownership").validateFieldValue(account.getOwnership());
         new ForceRecord(driver, "Employees").validateFieldValue(String.valueOf(account.getEmployees()));
         new ForceRecord(driver, "SIC Code").validateFieldValue(String.valueOf(account.getSicCode()));
-
         new ForceRecord(driver, "Billing Address").validateFieldValue(
                 account.getBillingStreet() + "\n"
                         + account.getBillingCity() + ", "
@@ -86,7 +84,6 @@ public class AccountViewPage extends BasePage {
                         + account.getMailingState() + " "
                         + account.getMailingZip() + "\n"
                         + account.getMailingCountry());
-
         new ForceRecord(driver, "Customer Priority").validateFieldValue(account.getCustomerPriority());
         new ForceRecord(driver, "Number of Locations").validateFieldValue(String.valueOf(account.getNumberOfLocations()));
         new ForceRecord(driver, "Active").validateFieldValue(account.getActive());

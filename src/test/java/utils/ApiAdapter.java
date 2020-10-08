@@ -15,18 +15,14 @@ public class ApiAdapter {
     public static String apiPostUrlCreateAccount;
 
     public ApiAdapter() {
-        try {
-            username = PropertyReader.getProperty("username");
-            password = PropertyReader.getProperty("password");
-            loginUrl = PropertyReader.getProperty("login.url");
-            clientId = PropertyReader.getProperty("api.client.id");
-            clientSecret = PropertyReader.getProperty("api.client.secret");
-            baseUrlClassic = PropertyReader.getProperty("base.url.classic");
-            apiPostUrlToken = PropertyReader.getProperty("api.post.url.token");
-            apiPostUrlCreateAccount = PropertyReader.getProperty("api.post.url.create.account");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        username = PropertyReader.getProperty("username");
+        password = PropertyReader.getProperty("password");
+        loginUrl = PropertyReader.getProperty("login.url");
+        clientId = PropertyReader.getProperty("api.client.id");
+        clientSecret = PropertyReader.getProperty("api.client.secret");
+        baseUrlClassic = PropertyReader.getProperty("base.url.classic");
+        apiPostUrlToken = PropertyReader.getProperty("api.post.url.token");
+        apiPostUrlCreateAccount = PropertyReader.getProperty("api.post.url.create.account");
     }
 
     public String getAccessToken(){

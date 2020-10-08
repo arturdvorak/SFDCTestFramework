@@ -17,11 +17,7 @@ public abstract class BasePage {
     public BasePage(WebDriver driver) {
         this.driver = driver;
         wait = new WebDriverWait(driver, 10);
-        try {
-            baseUrl = PropertyReader.getProperty("base.url.light");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        baseUrl = PropertyReader.getProperty("base.url.light");
     }
 
     @Attachment(value = "Page screenshot", type = "image/png")

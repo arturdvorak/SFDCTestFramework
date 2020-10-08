@@ -19,14 +19,20 @@ public final class PropertyReader {
         return propertiesPath;
     }
 
-    public static Properties readProperties() throws IOException {
+    public static Properties readProperties() {
         properties = new Properties();
         try {
             inputStream = PropertyReader.class.getResourceAsStream(getCorrectPath());
             if (inputStream != null)
                 properties.load(inputStream);
         } catch (Exception ex) {
-            if (inputStream != null) inputStream.close();
+            if (inputStream != null) {
+                try {
+                    inputStream.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
         }
         if(properties.getProperty("config_file")!=null){
             Properties additionalProperties = getProperties(properties.getProperty("config_file"));
@@ -35,16 +41,16 @@ public final class PropertyReader {
         return properties;
     }
 
-    private static Properties loadProperties() throws IOException {
+    private static Properties loadProperties() {
         return properties != null ? properties : readProperties();
     }
 
-    public static Properties getProperties(String path) throws IOException {
+    public static Properties getProperties(String path) {
         propertiesPath = path;
         return readProperties();
     }
 
-    public static String getProperty(String propertyName) throws IOException {
+    public static String getProperty(String propertyName) {
         return loadProperties().getProperty(propertyName);
     }
 

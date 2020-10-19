@@ -11,13 +11,13 @@ public class LoginSteps {
         loginPage = new LoginPage(driver);
     }
 
-    @Step
+    @Step("Open login page")
     public LoginSteps open() {
         loginPage.openPage();
         return this;
     }
 
-    @Step
+    @Step("Log in to SFDC")
     public void login(String username, String password) {
         loginPage.login(username, password);
     }

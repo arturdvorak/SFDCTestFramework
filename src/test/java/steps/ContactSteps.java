@@ -18,7 +18,7 @@ public class ContactSteps {
         contactViewPage = new ContactViewPage(driver);
     }
 
-    @Step
+    @Step(value = "Create new contact with name {contact.firstName} {contact.lastName}")
     public ContactSteps createNewContact(Contact contact) {
         contactListPage
                 .openPage()
@@ -29,7 +29,7 @@ public class ContactSteps {
         return this;
     }
 
-    @Step
+    @Step("Validate account with name {contact.firstName} {contact.lastName}")
     public ContactSteps validationOfContact(Contact contact) {
         contactListPage
                 .openPage()
@@ -39,7 +39,7 @@ public class ContactSteps {
         return this;
     }
 
-    @Step
+    @Step("Update contact {contact.firstName} {contact.lastName} data to contact {contact_updated.firstName} {contact_updated.lastName} data")
     public ContactSteps updateContact(Contact contact, Contact contact_updated) {
         contactListPage
                 .openPage()
@@ -49,7 +49,7 @@ public class ContactSteps {
         return this;
     }
 
-    @Step
+    @Step("Remove account with name {contact_updated.firstName} {contact_updated.lastName}")
     public ContactSteps removeContact(Contact contact) {
         contactListPage
                 .openPage()

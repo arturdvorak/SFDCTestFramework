@@ -8,7 +8,7 @@ public class ChromeDriverCreator extends WebDriverCreator {
     private static final String CHROME_PROPERTY = "webdriver.chrome.driver";
     private static final String CHROME_DRIVER = "chromedriver.exe";
     //private static final String driverPath = "src/test/resources/";
-    private static final String driverPath = "/usr/local/bin/";
+    private static final String driverPath = "src/test/resources/linux/";
     private ChromeOptions options;
 
     public WebDriver factoryMethod() {

@@ -6,7 +6,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import utils.PropertyReader;
-import java.io.IOException;
 
 public abstract class BasePage {
     protected WebDriver driver;
@@ -17,7 +16,7 @@ public abstract class BasePage {
     public BasePage(WebDriver driver) {
         this.driver = driver;
         wait = new WebDriverWait(driver, 10);
-        baseUrl = PropertyReader.getProperty("base.url.light");
+        baseUrl = System.getenv().getOrDefault("BASE_URL_LIGHT", PropertyReader.getProperty("base.url.light"));
     }
 
     @Attachment(value = "Page screenshot", type = "image/png")

@@ -18,7 +18,7 @@ public class AccountApiTest {
             .excludeFieldsWithoutExposeAnnotation()
             .create();
 
-    @Test(description = "Create account using API", enabled = true)
+    @Test(description = "Create account using API", enabled = false)
     public void createAccountUsingAPI() {
           Response response = given().auth().oauth2(apiAdapter.getAccessToken()).header(HTTP.CONTENT_TYPE, ContentType.JSON)
                 .body(gson.toJson(new AccountFactory().getAccount("0012w00000M1yrYAAR"))).log().all()

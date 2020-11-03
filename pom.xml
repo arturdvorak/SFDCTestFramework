@@ -13,7 +13,7 @@
         <selenide.version>5.2.3</selenide.version>
         <selenium.version>3.141.59</selenium.version>
         <testng.version>6.8</testng.version>
-        <aspectj.version>1.9.6</aspectj.version>
+        <aspectj.version>1.8.14</aspectj.version>
         <allure.version>2.13.6</allure.version>
     </properties>
 

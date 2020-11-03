@@ -9,7 +9,7 @@ public class ChromeDriverCreator extends WebDriverCreator {
     private static final String CHROME_PROPERTY = "webdriver.chrome.driver";
     private static final String CHROME_DRIVER = "chromedriver";
     //private static final String driverPath = "src/test/resources/";
-    private static final String driverPath = "src/test/resources/linux/";
+    private static final String driverPath = "src/test/resources";
     private ChromeOptions options;
     private static String osName = System.getProperty("os.name").toLowerCase();
 

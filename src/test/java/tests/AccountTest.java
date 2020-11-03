@@ -7,7 +7,7 @@ import org.testng.annotations.Test;
 public class AccountTest extends BaseTest {
     AccountFactory accountFactory = new AccountFactory();
 
-    @Test(enabled=false)
+    @Test(enabled=true)
     public void createAndRemoveAccount() {
         loginSteps
                 .open()

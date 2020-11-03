@@ -18,7 +18,7 @@ public class AccountSteps {
         accountViewPage = new AccountViewPage(driver);
     }
 
-    @Step
+    @Step(value = "Create new account with name {account.accountName}")
     public AccountSteps createNewAccount(Account account) {
         accountListPage
                 .openPage()
@@ -29,7 +29,7 @@ public class AccountSteps {
         return this;
     }
 
-    @Step
+    @Step("Validate account with name {account.accountName}")
     public AccountSteps validationOfAccount(Account account) {
         accountListPage
                 .openPage()
@@ -39,7 +39,7 @@ public class AccountSteps {
         return this;
     }
 
-    @Step
+    @Step("Update account {account.accountName} data to account {account_updated.accountName} data")
     public AccountSteps updateAccount(Account account, Account account_updated) {
         accountListPage
                 .openPage()
@@ -49,7 +49,7 @@ public class AccountSteps {
         return this;
     }
 
-    @Step
+    @Step("Remove account with name {account_updated.accountName}")
     public AccountSteps removeAccount(Account account_updated) {
         accountListPage
                 .openPage()

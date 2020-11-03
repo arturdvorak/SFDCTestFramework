@@ -7,7 +7,7 @@ import org.testng.annotations.Test;
 public class ContactTest extends BaseTest {
     ContactFactory contactFactory = new ContactFactory();
 
-    @Test(enabled=false)
+    @Test(description = "Create, updated and remove contact", enabled=true)
     public void createAndRemoveContact() {
         loginSteps
                 .open()

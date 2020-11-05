@@ -32,9 +32,7 @@ public abstract class BaseTest {
         browserType = System.getenv().getOrDefault("BROWSER_TYPE", PropertyReader.getProperty("browser.type"));
         driver = WebDriverSingleton.getWebDriverInstance(BrowserType.valueOf(browserType));
         loginSteps = new LoginSteps(driver);
-        context.setAttribute("driver", driver);
         contactSteps = new ContactSteps(driver);
-        context.setAttribute("driver", driver);
         accountSteps = new AccountSteps(driver);
         context.setAttribute("driver", driver);
     }

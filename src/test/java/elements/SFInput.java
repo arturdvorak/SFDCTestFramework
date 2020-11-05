@@ -1,9 +1,11 @@
 package elements;
 
+import lombok.extern.log4j.Log4j2;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
+@Log4j2
 public class SFInput extends BaseElement {
     private static final String INPUT_LOCATOR = "//span[text()='%s']/ancestor::div[contains(@Class, 'uiInput')]//input";
 

@@ -8,8 +8,8 @@ import utils.RetryCountIfFailed;
 public class AccountTest extends BaseTest {
     AccountFactory accountFactory = new AccountFactory();
 
-    @Test(description = "Create, updated and remove account", enabled=false)
-    @RetryCountIfFailed(5)
+    @Test(description = "Create, updated and remove account", enabled=true)
+    @RetryCountIfFailed(3)
     public void createAndRemoveAccount() {
         loginSteps
                 .open()

@@ -25,15 +25,18 @@ public abstract class BaseTest {
     AccountSteps accountSteps;
 
     @BeforeClass(description = "Initializing properties and browser")
-    public void setUp() {
+    public void setUp(ITestContext context) {
         loginUrl = System.getenv().getOrDefault("LOGIN_URL", PropertyReader.getProperty("login.url"));
         username = System.getenv().getOrDefault("USERNAME_SF", PropertyReader.getProperty("username"));
         password = System.getenv().getOrDefault("PASSWORD_SF", PropertyReader.getProperty("password"));
         browserType = System.getenv().getOrDefault("BROWSER_TYPE", PropertyReader.getProperty("browser.type"));
         driver = WebDriverSingleton.getWebDriverInstance(BrowserType.valueOf(browserType));
         loginSteps = new LoginSteps(driver);
+        context.setAttribute("driver", driver);
         contactSteps = new ContactSteps(driver);
+        context.setAttribute("driver", driver);
         accountSteps = new AccountSteps(driver);
+        context.setAttribute("driver", driver);
     }
 
     @AfterClass(description = "Closing browser")

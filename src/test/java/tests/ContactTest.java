@@ -3,11 +3,13 @@ package tests;
 import models.Contact;
 import models.ContactFactory;
 import org.testng.annotations.Test;
+import utils.RetryCountIfFailed;
 
 public class ContactTest extends BaseTest {
     ContactFactory contactFactory = new ContactFactory();
 
-    @Test(description = "Create, updated and remove contact", enabled=true, retryAnalyzer = utils.RetryAnalyzer.class)
+    @Test(description = "Create, updated and remove contact", enabled=true)
+    @RetryCountIfFailed(3)
     public void createAndRemoveContact() {
         loginSteps
                 .open()

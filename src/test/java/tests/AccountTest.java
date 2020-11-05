@@ -3,11 +3,13 @@ package tests;
 import models.Account;
 import models.AccountFactory;
 import org.testng.annotations.Test;
+import utils.RetryCountIfFailed;
 
 public class AccountTest extends BaseTest {
     AccountFactory accountFactory = new AccountFactory();
 
-    @Test(description = "Create, updated and remove account", enabled=false, retryAnalyzer = utils.RetryAnalyzer.class)
+    @Test(description = "Create, updated and remove account", enabled=false)
+    @RetryCountIfFailed(5)
     public void createAndRemoveAccount() {
         loginSteps
                 .open()

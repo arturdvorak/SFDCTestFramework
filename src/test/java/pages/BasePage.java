@@ -19,11 +19,6 @@ public abstract class BasePage {
         baseUrl = System.getenv().getOrDefault("BASE_URL_LIGHT", PropertyReader.getProperty("base.url.light"));
     }
 
-    @Attachment(value = "Page screenshot", type = "image/png")
-    public byte[] saveScreenshot(byte[] screenShot) {
-        return screenShot;
-    }
-
     public void waitForPageLoaded() {
         new ExpectedCondition<Boolean>() {
             public Boolean apply(WebDriver driver) {

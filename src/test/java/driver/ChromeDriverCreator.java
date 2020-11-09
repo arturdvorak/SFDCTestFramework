@@ -21,7 +21,6 @@ public class ChromeDriverCreator extends WebDriverCreator {
         } else {
             setProperty(CHROME_PROPERTY, driverPath + "/linux/chromedriver");
         }
-        //setProperty(CHROME_PROPERTY, driverPath+CHROME_DRIVER);
         return new ChromeDriver(getChromeOptions());
     }
 

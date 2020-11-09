@@ -8,7 +8,7 @@ public class TextArea extends BaseElement {
     private static final String TEXTAREA_LOCATOR = "//*[text() = '%s']/../..//textarea";
 
     public TextArea(WebDriver driver, String title) {
-        super(driver, title);;
+        super(driver, title);
     }
 
     public void fillInput(String text) {

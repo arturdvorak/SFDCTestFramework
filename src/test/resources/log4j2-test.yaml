@@ -2,24 +2,48 @@
 #https://logging.apache.org/log4j/2.x/manual/configuration.html
 Configuration:
   status: INFO
+
   Properties:
     Property:
       - name: "DefaultPattern"
         value: "%d{yyyy-MM-dd HH:mm:ss.SSS} %level [%t] [%c] - %msg%n"
+      - name: log-path
+        value: "logs"
+
   Appenders:
     Console:
       name: consoleAppender
       target: SYSTEM_OUT
       PatternLayout:
         Pattern: ${DefaultPattern}
+    File:
+      name: fileAppender
+      fileName: ${log-path}/logfile.log
+      PatternLayout:
+        Pattern: ${DefaultPattern}
+    RollingFile:
+      name: rollingFileAppender
+      fileName: ${log-path}/rollingfile.log
+      filePattern: "logs/archive/rollingfile.log.%d{yyyy-MM-dd-hh-mm}.gz"
+      PatternLayout:
+        Pattern: ${DefaultPattern}
+      Policies:
+        SizeBasedTriggeringPolicy:
+          size: 1 KB
+        DefaultRollOverStrategy:
+          max: 30
+
   Loggers:
-    logger:
-      -
-        name: consoleLogger
-        level: INFO
+    Logger:
+      - name: SFTestLogger
         additivity: true
         AppenderRef:
-          ref: consoleAppender
+          - ref: consoleAppender
+            level: INFO
+          - ref: fileAppender
+            level: INFO
+          - ref: rollingFileAppender
+            level: INFO
     Root:
       level: INFO
       AppenderRef:

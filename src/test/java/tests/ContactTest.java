@@ -8,7 +8,7 @@ public class ContactTest extends BaseTest {
     ContactFactory contactFactory = new ContactFactory();
 
     @Test(description = "Create, updated and remove contact",
-            enabled=true,
+            enabled=false,
             retryAnalyzer = utils.RetryAnalyzer.class)
     public void createAndRemoveContact() {
         loginSteps

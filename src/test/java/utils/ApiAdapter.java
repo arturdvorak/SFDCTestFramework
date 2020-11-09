@@ -16,9 +16,9 @@ public class ApiAdapter {
     public static String apiPostUrlCreateAccount;
 
     public ApiAdapter() {
-        username = System.getenv().getOrDefault("USERNAME", PropertyReader.getProperty("username"));
+        username = System.getenv().getOrDefault("USERNAME_SF", PropertyReader.getProperty("username"));
         log.atInfo().log("'Username' is set to {}", username);
-        password = System.getenv().getOrDefault("PASSWORD", PropertyReader.getProperty("password"));
+        password = System.getenv().getOrDefault("PASSWORD_SF", PropertyReader.getProperty("password"));
         log.atInfo().log("'Password' is set to {}", password);
         loginUrl = System.getenv().getOrDefault("LOGIN_URL", PropertyReader.getProperty("login.url"));
         log.atInfo().log("'LoginUrl' is set to {}", loginUrl);

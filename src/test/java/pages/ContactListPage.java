@@ -5,6 +5,7 @@ import models.Contact;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import static tests.BaseTest.baseUrl;
 
 public class ContactListPage extends BasePage {
     private final String URL_CONTACT_TAB = baseUrl + "o/Contact/list";

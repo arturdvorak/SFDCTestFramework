@@ -1,10 +1,13 @@
 package utils;
 
+import lombok.extern.log4j.Log4j2;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 import java.util.function.Consumer;
 
+@Log4j2
 public final class PropertyReader {
     private static String propertiesPath ="/config.properties";
     private static volatile Properties properties;
@@ -51,7 +54,15 @@ public final class PropertyReader {
     }
 
     public static String getProperty(String propertyName) {
-        return loadProperties().getProperty(propertyName);
+        String propVal = loadProperties().getProperty(propertyName);
+        log.atInfo().log("Getting property '{}' from file '{}'. Value: '{}'", propertyName, propertiesPath, propVal);
+        return propVal;
+    }
+
+    public static String getFromEnvOrFile(String envVar, String fileVar) {
+        String var = System.getenv().getOrDefault(envVar, getProperty(fileVar));
+        log.atInfo().log("Property {}/{} is set to {}", envVar, fileVar, var);
+        return var;
     }
 
     public static void fillAction(Consumer<String> action, String name) {

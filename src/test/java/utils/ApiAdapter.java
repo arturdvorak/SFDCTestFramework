@@ -1,9 +1,10 @@
 package utils;
 
+import lombok.extern.log4j.Log4j2;
 import org.apache.http.protocol.HTTP;
-import java.io.IOException;
 import static io.restassured.RestAssured.given;
 
+@Log4j2
 public class ApiAdapter {
     private static String username;
     private static String password;
@@ -15,14 +16,14 @@ public class ApiAdapter {
     public static String apiPostUrlCreateAccount;
 
     public ApiAdapter() {
-        username = System.getenv().getOrDefault("USERNAME", PropertyReader.getProperty("username"));
-        password = System.getenv().getOrDefault("PASSWORD", PropertyReader.getProperty("password"));
-        loginUrl = System.getenv().getOrDefault("LOGIN_URL", PropertyReader.getProperty("login.url"));
-        clientId = System.getenv().getOrDefault("API_CLIENT_ID", PropertyReader.getProperty("api.client.id"));
-        clientSecret = System.getenv().getOrDefault("API_CLIENT_SECRET", PropertyReader.getProperty("api.client.secret"));
-        baseUrlClassic = System.getenv().getOrDefault("BASE_URL_CLASSIC", PropertyReader.getProperty("base.url.classic"));
-        apiPostUrlToken = System.getenv().getOrDefault("API_POST_URL_TOKEN", PropertyReader.getProperty("api.post.url.token"));
-        apiPostUrlCreateAccount = System.getenv().getOrDefault("API_POST_IRL_CREATE_ACCOUNT", PropertyReader.getProperty("api.post.url.create.account"));
+        loginUrl = PropertyReader.getFromEnvOrFile("LOGIN_URL", "login.url");
+        username = PropertyReader.getFromEnvOrFile("USERNAME_SF", "username");
+        password = PropertyReader.getFromEnvOrFile("PASSWORD_SF", "password");
+        clientId = PropertyReader.getFromEnvOrFile("API_CLIENT_ID", "api.client.id");
+        clientSecret = PropertyReader.getFromEnvOrFile("API_CLIENT_SECRET", "api.client.secret");
+        baseUrlClassic = PropertyReader.getFromEnvOrFile("BASE_URL_CLASSIC", "base.url.classic");
+        apiPostUrlToken = PropertyReader.getFromEnvOrFile("API_POST_URL_TOKEN", "api.post.url.token");
+        apiPostUrlCreateAccount = PropertyReader.getFromEnvOrFile("API_POST_IRL_CREATE_ACCOUNT", "api.post.url.create.account");
     }
 
     public String getAccessToken(){

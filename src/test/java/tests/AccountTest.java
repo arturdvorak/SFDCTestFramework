@@ -7,8 +7,8 @@ import org.testng.annotations.Test;
 public class AccountTest extends BaseTest {
     AccountFactory accountFactory = new AccountFactory();
 
-    @Test(description = "Create, updated and remove account",
-            enabled=false,
+    @Test(description = "Create, validate, update and remove account",
+            enabled=true,
             retryAnalyzer = utils.RetryAnalyzer.class)
     public void createAndRemoveAccount() {
         loginSteps

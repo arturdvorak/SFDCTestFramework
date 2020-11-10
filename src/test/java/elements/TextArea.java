@@ -1,9 +1,11 @@
 package elements;
 
+import lombok.extern.log4j.Log4j2;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
+@Log4j2
 public class TextArea extends BaseElement {
     private static final String TEXTAREA_LOCATOR = "//*[text() = '%s']/../..//textarea";
 
@@ -12,7 +14,7 @@ public class TextArea extends BaseElement {
     }
 
     public void fillInput(String text) {
-        System.out.println(String.format("'%s' text is inputted to '%s' field", text, title));
+        log.atInfo().log("'{}' text is inputted to '{}' field", text, title);
         WebElement element = driver.findElement(By.xpath(String.format(TEXTAREA_LOCATOR, title)));
         element.clear();
         element.sendKeys(text);

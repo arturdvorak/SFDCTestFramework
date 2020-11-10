@@ -5,6 +5,7 @@ import models.Account;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import static tests.BaseTest.baseUrl;
 
 public class AccountListPage extends BasePage {
     private final String URL_ACCOUNT_TAB = baseUrl + "o/Account/list";

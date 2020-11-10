@@ -2,6 +2,7 @@ package tests;
 
 import driver.BrowserType;
 import driver.WebDriverSingleton;
+import lombok.extern.log4j.Log4j2;
 import org.openqa.selenium.WebDriver;
 import org.testng.ITestContext;
 import org.testng.annotations.AfterClass;
@@ -13,10 +14,12 @@ import org.testng.annotations.BeforeClass;
 import utils.PropertyReader;
 import utils.TestListener;
 
+@Log4j2
 @Listeners(TestListener.class)
 public abstract class BaseTest {
     public static String browserType;
     public static String loginUrl;
+    public static String baseUrl;
     String username;
     String password;
     private WebDriver driver;
@@ -26,10 +29,11 @@ public abstract class BaseTest {
 
     @BeforeClass(description = "Initializing properties and browser")
     public void setUp(ITestContext context) {
-        loginUrl = System.getenv().getOrDefault("LOGIN_URL", PropertyReader.getProperty("login.url"));
-        username = System.getenv().getOrDefault("USERNAME_SF", PropertyReader.getProperty("username"));
-        password = System.getenv().getOrDefault("PASSWORD_SF", PropertyReader.getProperty("password"));
-        browserType = System.getenv().getOrDefault("BROWSER_TYPE", PropertyReader.getProperty("browser.type"));
+        loginUrl = PropertyReader.getFromEnvOrFile("LOGIN_URL", "login.url");
+        username = PropertyReader.getFromEnvOrFile("USERNAME_SF", "username");
+        password = PropertyReader.getFromEnvOrFile("PASSWORD_SF", "password");
+        browserType = PropertyReader.getFromEnvOrFile("BROWSER_TYPE", "browser.type");
+        baseUrl = PropertyReader.getFromEnvOrFile("BASE_URL_LIGHT", "base.url.light");
         driver = WebDriverSingleton.getWebDriverInstance(BrowserType.valueOf(browserType));
         loginSteps = new LoginSteps(driver);
         contactSteps = new ContactSteps(driver);

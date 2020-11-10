@@ -12,6 +12,22 @@ Configuration:
       target: SYSTEM_OUT
       PatternLayout:
         Pattern: ${DefaultPattern}
+    File:
+      name: fileAppender
+      fileName: "target/tests.log"
+      PatternLayout:
+        Pattern: ${DefaultPattern}
+    RollingFile:
+      name: rollingFileAppender
+      fileName: "target/rollingfile.log"
+      filePattern: "target/archive/rollingfile.log.%d{yyyy-MM-dd-hh-mm}.gz"
+      PatternLayout:
+        Pattern: ${DefaultPattern}
+      Policies:
+        SizeBasedTriggeringPolicy:
+          size: 1 KB
+        DefaultRollOverStrategy:
+          max: 30
   Loggers:
     logger:
       -
@@ -20,8 +36,24 @@ Configuration:
         additivity: true
         AppenderRef:
           ref: consoleAppender
+      -
+        name: fileLogger
+        level: INFO
+        additivity: false
+        AppenderRef:
+          ref: fileAppender
+      -
+        name: rollingFileAppender
+        level: INFO
+        additivity: false
+        AppenderRef:
+          ref: rollingFileAppender
     Root:
       level: INFO
       AppenderRef:
         - ref: consoleAppender
+          level: INFO
+        - ref: fileAppender
+          level: INFO
+        - ref: rollingFileAppender
           level: INFO

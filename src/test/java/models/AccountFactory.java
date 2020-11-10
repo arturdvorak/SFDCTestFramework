@@ -13,7 +13,7 @@ public class AccountFactory {
                 .parentAccount(parentAccountName)
                 .accountNumber(usFaker.number().numberBetween(0,99999))
                 .accountSite(usFaker.internet().domainName())
-                .type(usFaker.options().option("Prospect", "Customer - Direct", "Customer - Channel", "Other"))
+                .type(usFaker.options().option("Prospect", "Other"))
                 .industry(usFaker.options().option("Banking", "Chemicals", "Apparel"))
                 .annualRevenue(usFaker.number().numberBetween(0,999999))
                 .rating(usFaker.options().option("Hot", "Warm", "Cold"))

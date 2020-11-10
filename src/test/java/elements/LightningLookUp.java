@@ -1,12 +1,10 @@
 package elements;
 
 import driver.JSUtils;
-import lombok.extern.log4j.Log4j2;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import java.util.concurrent.TimeUnit;
 
-@Log4j2
 public class LightningLookUp extends BaseElement {
     private static final String LOCATOR_LOOKUP = "//label[text() = '%s']/ancestor::lightning-lookup";
     private static final String DROPDOWN_LOCATOR = LOCATOR_LOOKUP + "//input";

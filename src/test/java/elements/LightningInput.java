@@ -15,10 +15,10 @@ public class LightningInput extends BaseElement {
     }
 
     public void fillInput(String text) {
+        log.atInfo().log("'{}' text is inputted to '{}' field", text, title);
         WebElement element = driver.findElement(By.xpath(String.format(INPUT_LOCATOR, title)));
         wait.until(ExpectedConditions.visibilityOf(element));
         element.clear();
         element.sendKeys(text);
-        log.atInfo().log("'{}' text is inputted to '{}' field", text, title);
     }
 }

@@ -1,8 +1,10 @@
 package driver;
 
+import lombok.extern.log4j.Log4j2;
 import org.openqa.selenium.WebDriver;
 import java.util.concurrent.TimeUnit;
 
+@Log4j2
 public class WebDriverSingleton {
     private static WebDriver driver;
 
@@ -24,15 +26,19 @@ public class WebDriverSingleton {
             switch (browserType) {
                 case FF:
                     creator = new FirefoxDriverCreator();
+                    log.atInfo().log("FireFoxDriver initiating.");
                     break;
                 case GC:
                     creator = new ChromeDriverCreator();
+                    log.atInfo().log("ChromeDriver initiating.");
                     break;
                 case IE:
                     creator = new InternetExplorerDriverCreator();
+                    log.atInfo().log("InternetExplorerDriver initiating.");
                     break;
                 default:
                     creator = new ChromeDriverCreator();
+                    log.atInfo().log("ChromeDriver initiating as browser type is not provided.");
             }
             driver = creator.factoryMethod();
             return driver;

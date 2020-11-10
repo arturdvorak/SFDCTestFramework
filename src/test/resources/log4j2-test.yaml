@@ -2,14 +2,10 @@
 #https://logging.apache.org/log4j/2.x/manual/configuration.html
 Configuration:
   status: INFO
-
   Properties:
     Property:
       - name: "DefaultPattern"
         value: "%d{yyyy-MM-dd HH:mm:ss.SSS} %level [%t] [%c] - %msg%n"
-      - name: log-path
-        value: "logs"
-
   Appenders:
     Console:
       name: consoleAppender
@@ -18,34 +14,46 @@ Configuration:
         Pattern: ${DefaultPattern}
     File:
       name: fileAppender
-      fileName: ${log-path}/logfile.log
+      fileName: "target/tests.log"
       PatternLayout:
         Pattern: ${DefaultPattern}
     RollingFile:
       name: rollingFileAppender
-      fileName: ${log-path}/rollingfile.log
-      filePattern: "logs/archive/rollingfile.log.%d{yyyy-MM-dd-hh-mm}.gz"
+      fileName: "target/rollingfile.log"
+      filePattern: "target/archive/rollingfile.log.%d{yyyy-MM-dd-hh-mm}.gz"
       PatternLayout:
         Pattern: ${DefaultPattern}
       Policies:
         SizeBasedTriggeringPolicy:
           size: 1 KB
-      DefaultRollOverStrategy:
-        max: 30
-
+        DefaultRollOverStrategy:
+          max: 30
   Loggers:
-    Logger:
-      - name: SFTestLogger
+    logger:
+      -
+        name: consoleLogger
+        level: INFO
         additivity: true
         AppenderRef:
-          - ref: consoleAppender
-            level: INFO
-          - ref: fileAppender
-            level: INFO
-          - ref: rollingFileAppender
-            level: INFO
+          ref: consoleAppender
+      -
+        name: fileLogger
+        level: INFO
+        additivity: false
+        AppenderRef:
+          ref: fileAppender
+      -
+        name: rollingFileAppender
+        level: INFO
+        additivity: false
+        AppenderRef:
+          ref: rollingFileAppender
     Root:
       level: INFO
       AppenderRef:
         - ref: consoleAppender
+          level: INFO
+        - ref: fileAppender
+          level: INFO
+        - ref: rollingFileAppender
           level: INFO

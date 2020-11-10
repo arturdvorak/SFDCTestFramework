@@ -1,6 +1,8 @@
 package pages;
 
+import driver.JSUtils;
 import elements.*;
+import models.Account;
 import models.Contact;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -10,6 +12,7 @@ public class ContactViewPage extends BasePage {
     private static final By TAB_DETAILS = By.xpath(ACTIVE_TAB_LOCATOR + "//a[@data-label='Details']");
     private static final By FIELD_NAME_EDIT = By.xpath("//div/span[text()='Name']/../..//button");
     private static final By TITLE_CONTACTS = By.xpath("//li/span[text()='Contacts']");
+    private static final String SHOW_MORE_BUTTON_IN_TABLE_ROW = "//a[text()='%s']/ancestor::tr//a[contains(@role, 'button')]";
 
     public ContactViewPage(WebDriver driver) {
         super(driver);
@@ -99,5 +102,15 @@ public class ContactViewPage extends BasePage {
         new Button(driver,"Delete").click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(TITLE_CONTACTS));
         return new ContactViewPage(driver);
+    }
+
+    public AccountListPage deleteContactByName(Contact contact) {
+        JSUtils.clickUsingJavaScript(driver,
+                driver.findElement(By.xpath(String.format(SHOW_MORE_BUTTON_IN_TABLE_ROW, contact.getFirstName() + " " + contact.getLastName()))));
+        new Button(driver,"Delete").clickUsingJavaScript();
+        driver.switchTo().activeElement();
+        new Button(driver,"Delete").click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(TITLE_CONTACTS));
+        return new AccountListPage(driver);
     }
 }

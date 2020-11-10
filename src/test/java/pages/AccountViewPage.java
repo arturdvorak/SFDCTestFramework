@@ -1,15 +1,19 @@
 package pages;
 
+import driver.JSUtils;
 import elements.*;
+import lombok.extern.log4j.Log4j2;
 import models.Account;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
+@Log4j2
 public class AccountViewPage extends BasePage {
     private static final By TAB_DETAILS = By.xpath(ACTIVE_TAB_LOCATOR + "//a[@data-label='Details']");
     private static final By FIELD_ACCOUNT_NAME_EDIT = By.xpath("//div/span[text()='Account Name']/ancestor::force-record-layout-item//button");
     private static final By TITLE_ACCOUNTS = By.xpath("//li/span[text()='Accounts']");
+    private static final String SHOW_MORE_BUTTON_IN_TABLE_ROW = "//a[text()='%s']/ancestor::tr//a[contains(@role, 'button')]";
 
     public AccountViewPage(WebDriver driver) {
         super(driver);
@@ -93,8 +97,9 @@ public class AccountViewPage extends BasePage {
         return new AccountListPage(driver);
     }
 
-    public AccountListPage deleteOpenedAccount() {
-        new Button(driver,"Show 8 more actions").click();
+    public AccountListPage deleteAccountByName(Account account) {
+        JSUtils.clickUsingJavaScript(driver,
+                driver.findElement(By.xpath(String.format(SHOW_MORE_BUTTON_IN_TABLE_ROW, account.getAccountName()))));
         new Button(driver,"Delete").clickUsingJavaScript();
         driver.switchTo().activeElement();
         new Button(driver,"Delete").click();

@@ -1,12 +1,14 @@
 package steps;
 
 import io.qameta.allure.Step;
+import lombok.extern.log4j.Log4j2;
 import models.Contact;
 import org.openqa.selenium.WebDriver;
 import pages.ContactListPage;
 import pages.ContactViewPage;
 import pages.NewContactModal;
 
+@Log4j2
 public class ContactSteps {
     ContactListPage contactListPage;
     NewContactModal newContactModal;
@@ -20,6 +22,7 @@ public class ContactSteps {
 
     @Step(value = "Create new contact with name {contact.firstName} {contact.lastName}")
     public ContactSteps createNewContact(Contact contact) {
+        log.atInfo().log("Create new contact with name {}", contact.getAccountName());
         contactListPage
                 .openPage()
                 .openNewContactModal();
@@ -29,8 +32,9 @@ public class ContactSteps {
         return this;
     }
 
-    @Step("Validate account with name {contact.firstName} {contact.lastName}")
+    @Step("Validate contact with name {contact.firstName} {contact.lastName}")
     public ContactSteps validationOfContact(Contact contact) {
+        log.atInfo().log("Validate account with name {} {}", contact.getFirstName(), contact.getLastName());
         contactListPage
                 .openPage()
                 .openContact(contact);
@@ -41,6 +45,8 @@ public class ContactSteps {
 
     @Step("Update contact {contact.firstName} {contact.lastName} data to contact {contact_updated.firstName} {contact_updated.lastName} data")
     public ContactSteps updateContact(Contact contact, Contact contact_updated) {
+        log.atInfo().log("Update contact {} {} data to contact {} {} data",
+                contact.getFirstName(), contact.getLastName(), contact_updated.getFirstName(), contact_updated.getLastName());
         contactListPage
                 .openPage()
                 .openContact(contact);
@@ -49,13 +55,13 @@ public class ContactSteps {
         return this;
     }
 
-    @Step("Remove account with name {contact_updated.firstName} {contact_updated.lastName}")
-    public ContactSteps removeContact(Contact contact) {
+    @Step("Remove contact with name {contact_updated.firstName} {contact_updated.lastName}")
+    public ContactSteps removeContact(Contact contact_updated) {
+        log.atInfo().log("Remove contact with name {} {}", contact_updated.getFirstName(), contact_updated.getLastName());
         contactListPage
-                .openPage()
-                .openContact(contact);
+                .openPage();
         contactViewPage
-                .deleteOpenedContact();
+                .deleteContactByName(contact_updated);
         return this;
     }
 }

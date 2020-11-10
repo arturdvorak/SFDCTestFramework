@@ -8,7 +8,7 @@ public class AccountTest extends BaseTest {
     AccountFactory accountFactory = new AccountFactory();
 
     @Test(description = "Create, updated and remove account",
-            enabled=false,
+            enabled=true,
             retryAnalyzer = utils.RetryAnalyzer.class)
     public void createAndRemoveAccount() {
         loginSteps

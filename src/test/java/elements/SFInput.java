@@ -14,7 +14,7 @@ public class SFInput extends BaseElement {
     }
 
     public void fillInput(String text) {
-        System.out.println(String.format("'%s' text is inputted to '%s' field", text, title));
+        log.atInfo().log("'{}' text is inputted to '{}' field", text, title);
         WebElement element = driver.findElement(By.xpath(String.format(INPUT_LOCATOR, title)));
         element.clear();
         element.sendKeys(text);

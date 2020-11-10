@@ -1,8 +1,10 @@
 package driver;
 
+import lombok.extern.log4j.Log4j2;
 import org.openqa.selenium.WebDriver;
 import java.util.concurrent.TimeUnit;
 
+@Log4j2
 public class WebDriverSingleton {
     private static WebDriver driver;
 

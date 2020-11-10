@@ -22,12 +22,12 @@ public class AccountApiTest {
 
     @Test(description = "Create account using API", enabled = true)
     public void createAccountUsingAPI() {
-        log.atInfo().log("Access token is got as {}", apiAdapter.getAccessToken());
+        log.atInfo().log("Access token: {}", apiAdapter.getAccessToken());
           Response response = given().auth().oauth2(apiAdapter.getAccessToken()).header(HTTP.CONTENT_TYPE, ContentType.JSON)
-                .body(gson.toJson(new AccountFactory().getAccount("0012w00000M1yrYAAR"))).log().all()
+                .body(gson.toJson(new AccountFactory().getAccount("0012w00000M1yrYAAR")))
                 .when()
                 .post(ApiAdapter.baseUrlClassic + ApiAdapter.apiPostUrlCreateAccount)
-                .then().log().all()
+                .then()
                 .statusCode(201)
                 .extract().response();
         log.atInfo().log("Response body is the following {}", response.body().asString());

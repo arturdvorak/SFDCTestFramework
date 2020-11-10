@@ -1,10 +1,10 @@
 package elements;
 
-import org.openqa.selenium.JavascriptExecutor;
+import lombok.extern.log4j.Log4j2;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+@Log4j2
 public class BaseElement {
     protected WebDriver driver;
     protected String title;

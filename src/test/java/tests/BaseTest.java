@@ -19,6 +19,7 @@ import utils.TestListener;
 public abstract class BaseTest {
     public static String browserType;
     public static String loginUrl;
+    public static String baseUrl;
     String username;
     String password;
     private WebDriver driver;
@@ -32,6 +33,7 @@ public abstract class BaseTest {
         username = PropertyReader.getFromEnvOrFile("USERNAME_SF", "username");
         password = PropertyReader.getFromEnvOrFile("PASSWORD_SF", "password");
         browserType = PropertyReader.getFromEnvOrFile("BROWSER_TYPE", "browser.type");
+        baseUrl = PropertyReader.getFromEnvOrFile("BASE_URL_LIGHT", "base.url.light");
         driver = WebDriverSingleton.getWebDriverInstance(BrowserType.valueOf(browserType));
         loginSteps = new LoginSteps(driver);
         contactSteps = new ContactSteps(driver);

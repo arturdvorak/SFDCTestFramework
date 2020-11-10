@@ -28,14 +28,10 @@ public abstract class BaseTest {
 
     @BeforeClass(description = "Initializing properties and browser")
     public void setUp(ITestContext context) {
-        loginUrl = System.getenv().getOrDefault("LOGIN_URL", PropertyReader.getProperty("login.url"));
-        log.atInfo().log("'loginUrl' is set to {}", loginUrl);
-        username = System.getenv().getOrDefault("USERNAME_SF", PropertyReader.getProperty("username"));
-        log.atInfo().log("'Username' is set to {}", username);
-        password = System.getenv().getOrDefault("PASSWORD_SF", PropertyReader.getProperty("password"));
-        log.atInfo().log("'Password' is set to {}", password);
-        browserType = System.getenv().getOrDefault("BROWSER_TYPE", PropertyReader.getProperty("browser.type"));
-        log.atInfo().log("'BrowserType' is set to {}", browserType);
+        loginUrl = PropertyReader.getFromEnvOrFile("LOGIN_URL", "login.url");
+        username = PropertyReader.getFromEnvOrFile("USERNAME_SF", "username");
+        password = PropertyReader.getFromEnvOrFile("PASSWORD_SF", "password");
+        browserType = PropertyReader.getFromEnvOrFile("BROWSER_TYPE", "browser.type");
         driver = WebDriverSingleton.getWebDriverInstance(BrowserType.valueOf(browserType));
         loginSteps = new LoginSteps(driver);
         contactSteps = new ContactSteps(driver);

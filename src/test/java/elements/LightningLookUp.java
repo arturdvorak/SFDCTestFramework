@@ -24,6 +24,7 @@ public class LightningLookUp extends BaseElement {
             JSUtils.clickUsingJavaScript(driver, driver.findElement(By.xpath(String.format(DROPDOWN_REMOVE_BUTTON, title))));
         }
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        log.atInfo().log("Select '{}' value from '{}' drop-down", text, title);
         JSUtils.clickUsingJavaScript(driver, driver.findElement(By.xpath(String.format(DROPDOWN_LOCATOR, title))));
         JSUtils.clickUsingJavaScript(driver, driver.findElement(By.xpath(String.format(DROPDOWN_VALUE, title, text))));
     }

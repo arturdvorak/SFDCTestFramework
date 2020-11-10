@@ -16,22 +16,14 @@ public class ApiAdapter {
     public static String apiPostUrlCreateAccount;
 
     public ApiAdapter() {
-        username = System.getenv().getOrDefault("USERNAME_SF", PropertyReader.getProperty("username"));
-        log.atInfo().log("'Username' is set to {}", username);
-        password = System.getenv().getOrDefault("PASSWORD_SF", PropertyReader.getProperty("password"));
-        log.atInfo().log("'Password' is set to {}", password);
-        loginUrl = System.getenv().getOrDefault("LOGIN_URL", PropertyReader.getProperty("login.url"));
-        log.atInfo().log("'LoginUrl' is set to {}", loginUrl);
-        clientId = System.getenv().getOrDefault("API_CLIENT_ID", PropertyReader.getProperty("api.client.id"));
-        log.atInfo().log("'Client Id' is set to {}", clientId);
-        clientSecret = System.getenv().getOrDefault("API_CLIENT_SECRET", PropertyReader.getProperty("api.client.secret"));
-        log.atInfo().log("'Client Secret' is set to {}", clientSecret);
-        baseUrlClassic = System.getenv().getOrDefault("BASE_URL_CLASSIC", PropertyReader.getProperty("base.url.classic"));
-        log.atInfo().log("'BaseUrlClassic' is set to {}", baseUrlClassic);
-        apiPostUrlToken = System.getenv().getOrDefault("API_POST_URL_TOKEN", PropertyReader.getProperty("api.post.url.token"));
-        log.atInfo().log("'ApiPostUrlToken' is set to {}", apiPostUrlToken);
-        apiPostUrlCreateAccount = System.getenv().getOrDefault("API_POST_IRL_CREATE_ACCOUNT", PropertyReader.getProperty("api.post.url.create.account"));
-        log.atInfo().log("'ApiPostUrlCreateAccount' is set to {}", apiPostUrlCreateAccount);
+        loginUrl = PropertyReader.getFromEnvOrFile("LOGIN_URL", "login.url");
+        username = PropertyReader.getFromEnvOrFile("USERNAME_SF", "username");
+        password = PropertyReader.getFromEnvOrFile("PASSWORD_SF", "password");
+        clientId = PropertyReader.getFromEnvOrFile("API_CLIENT_ID", "api.client.id");
+        clientSecret = PropertyReader.getFromEnvOrFile("API_CLIENT_SECRET", "api.client.secret");
+        baseUrlClassic = PropertyReader.getFromEnvOrFile("BASE_URL_CLASSIC", "base.url.classic");
+        apiPostUrlToken = PropertyReader.getFromEnvOrFile("API_POST_URL_TOKEN", "api.post.url.token");
+        apiPostUrlCreateAccount = PropertyReader.getFromEnvOrFile("API_POST_IRL_CREATE_ACCOUNT", "api.post.url.create.account");
     }
 
     public String getAccessToken(){

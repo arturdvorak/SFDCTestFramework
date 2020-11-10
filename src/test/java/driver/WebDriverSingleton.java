@@ -23,22 +23,19 @@ public class WebDriverSingleton {
 
     private static WebDriver createDriver(BrowserType browserType) {
             WebDriverCreator creator;
+            log.atInfo().log("Browser type is {}", browserType);
             switch (browserType) {
                 case FF:
                     creator = new FirefoxDriverCreator();
-                    log.atInfo().log("FireFoxDriver initiating.");
                     break;
                 case GC:
                     creator = new ChromeDriverCreator();
-                    log.atInfo().log("ChromeDriver initiating.");
                     break;
                 case IE:
                     creator = new InternetExplorerDriverCreator();
-                    log.atInfo().log("InternetExplorerDriver initiating.");
                     break;
                 default:
                     creator = new ChromeDriverCreator();
-                    log.atInfo().log("ChromeDriver initiating as browser type is not provided.");
             }
             driver = creator.factoryMethod();
             return driver;

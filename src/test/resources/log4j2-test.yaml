@@ -30,8 +30,8 @@ Configuration:
       Policies:
         SizeBasedTriggeringPolicy:
           size: 1 KB
-        DefaultRollOverStrategy:
-          max: 30
+      DefaultRollOverStrategy:
+        max: 30
 
   Loggers:
     Logger:

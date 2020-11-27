@@ -20,7 +20,7 @@ public class AccountApiTest {
             .excludeFieldsWithoutExposeAnnotation()
             .create();
 
-    @Test(description = "Create account using API", enabled = true)
+    @Test(description = "Create account using API", enabled = false)
     public void createAccountUsingAPI() {
         log.atInfo().log("Access token: {}", apiAdapter.getAccessToken());
           Response response = given().auth().oauth2(apiAdapter.getAccessToken()).header(HTTP.CONTENT_TYPE, ContentType.JSON)

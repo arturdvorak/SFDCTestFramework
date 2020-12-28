@@ -14,7 +14,7 @@ pipeline {
         stage('Build') {
             steps {
                 // Get some code from a GitHub repository
-                git 'https://github.com/arturdvorak/SFDCTestFramework.git'
+                git branch: "${params.BRANCH}", url: 'https://github.com/arturdvorak/SFDCTestFramework.git'
 
                 // Run Maven on a Unix agent.
                 //sh "mvn -Dmaven.test.failure.ignore=true clean package"
@@ -29,6 +29,20 @@ pipeline {
                 success {
                     junit '**/target/surefire-reports/TEST-*.xml'
                     archiveArtifacts 'target/*.jar'
+                }
+            }
+
+            stage('Generating Allure Report') {
+                steps {
+                    script {
+                        allure([
+                            includeProperties: false,
+                            jdk: '',
+                            properties: [],
+                            reportBuildPolicy: 'ALWAYS',
+                            results: [[path: 'target/allure-results']]
+                        ])
+                    }
                 }
             }
         }

@@ -31,18 +31,18 @@ pipeline {
                     archiveArtifacts 'target/*.jar'
                 }
             }
+        }
 
-            stage('Generating Allure Report') {
-                steps {
-                    script {
-                        allure([
-                            includeProperties: false,
-                            jdk: '',
-                            properties: [],
-                            reportBuildPolicy: 'ALWAYS',
-                            results: [[path: 'target/allure-results']]
-                        ])
-                    }
+        stage('Generating Allure Report') {
+            steps {
+                script {
+                    allure([
+                        includeProperties: false,
+                        jdk: '',
+                        properties: [],
+                        reportBuildPolicy: 'ALWAYS',
+                        results: [[path: 'target/allure-results']]
+                    ])
                 }
             }
         }
